@@ -1,13 +1,9 @@
 //Nombre: Jorge Andres Ibarra Mogro
 //Fecha: 9 de agosto
 
-//librerias
-
-#include "stdafx.h"
 #include "conio.h"
 #include "stdlib.h"
 #include <iostream>
-
 
 using namespace std;
 
