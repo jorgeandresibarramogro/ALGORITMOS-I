@@ -1,37 +1,53 @@
 // Nombre: Jorge Andres Ibarra Mogro
 // Fecha: 9 de agosto
 
+// asdfg.cpp : Defines the entry point for the console application.
+//
+
 #include "stdafx.h"
 #include <iostream>
 #include "conio.h"
+#include "stdlib.h"
 
 using namespace std;
 
 void main()
 {
-   int a, b, r, opcion;
-   cout << "Ingrese a: " ;
-   cin >> a;
-   cout << "Ingrese b: " ;
-   cin >> b;
-   do {
-     cout << endl;
-     cout << "1.- Suma" << endl;
-     cout << "2.- Resta" << endl;
-     cout << "3.- Producto" << endl;
-     cout << "4.- División" << endl;
-	 cout << "0.- Salir" << endl;
-     cout << "Elige una opción: " ;
-     cin >> opcion;
-     switch (opcion) {
-	    case 1: r = a + b; break;
-	    case 2: r = a - b; break;
-	    case 3: r = a * b; break;
-	    case 4: r = a / b; break;
-		case 0: cout << "Salir";break;
-	    default: cout << "Opcion invalida" << endl;
-     }
-     cout << "El resultado es " << r << endl;
-	 } while (opcion != 0);
-     getch();
+	float  a, b;
+	int opcion;
+	cout << "Ingrese el valor de A: ";
+	cin >> a;
+	cout << "Ingrese el valor de B: ";
+	cin >> b;
+	do{
+		cout << "_______________OPERACIONES________________\n";
+		cout << "\t 1. Suma \n";
+		cout << "\t 2. Resta \n";
+		cout << "\t 3. Multiplicacion \n";
+		cout << "\t 4. Division \n";
+		cout << "\t 0. Salir \n";
+		cin >> opcion;
+		switch (opcion)
+		{
+		case 1: 
+			cout << "\t Suma es: " << a+b;
+			break;
+		case 2:
+			cout << "\t Resta es: " << a-b;
+			break;
+		case 3 :
+			cout << "\t Multiplicacion es: " << a*b;
+			break;
+		case 4:
+			cout << "\t Division es: " << a/b;
+			break;
+		case 0:
+			break;
+		default:
+			cout << "\t Opcion invalidad, elija otra opcion";
+		}
+		system("clr");
+	}while(opcion!=0);
+
+	_getch();
 }
