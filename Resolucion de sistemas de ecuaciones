@@ -1,0 +1,31 @@
+//Nombre: Jorge Andres Ibarra Mogro
+//Fecha: 16 de agosto
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+void main()
+{
+	float A, B, C, D, E, F, X, Y;
+	cout<<"Ingrese la constante de X de la primera ecuacion: ";
+	cin>>A;
+	cout<<"Ingrese la constante de Y de la primera ecuacion: ";
+	cin>>B;
+	cout<<"Ingrese el valor independiente de la primera ecuacion: ";
+	cin>>C;
+	cout<<"Ingrese la constante de X de la segunda ecuacion: ";
+	cin>>D;
+	cout<<"Ingrese la constante de Y de la segunda ecuacion: ";
+	cin>>E;
+	cout<<"Ingrese el valor independiente de la segunda ecuacion: ";
+	cin>>F;
+	X=((C*E)-(F*B))/((A*E)-(D*B));
+	Y=((A*F)-(D*C))/((A*E)-(D*B));
+	cout<<"Los valores de X y Y del sistema: \n"<<A<<"X+ "<<B<<"Y= "<<C<<endl;
+	cout<<D<<"X+ "<<E<<"Y= "<<F<<endl;
+	cout<<"El valor de X= "<<X<<" El valor de Y= "<<Y;
+	getch();
+}
