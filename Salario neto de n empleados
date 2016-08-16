@@ -1,0 +1,31 @@
+//Nombre: Jorge Andres Ibarra Mogro
+//Fecha: 16 de agosto
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+void main()
+{
+	int n;
+	float salariobruto, descuento, salarioneto;
+	cout<<"Ingrese el numero de empleados"<<endl;
+	cin>>n;
+	for(int i=0; i<n; i++)
+	{
+		cout<<"Ingrese el salario del "<< i+1<<"° empleado: "<<endl;
+		cin>>salariobruto;
+		if(salariobruto>=1805)
+		{
+			cout<<"Ingrese el descuento a pagar del "<< i+1<<"° empleado: "<<endl;
+			cin>>descuento;
+			salarioneto=salariobruto-(descuento/100)*salariobruto;
+			cout<<"El salario neto para el empleado: "<<i+1<<"es: "<<salarioneto<<endl;
+		}
+		else
+			cout<<"Salario ilegal"<<endl;
+	}
+	getch();
+}
