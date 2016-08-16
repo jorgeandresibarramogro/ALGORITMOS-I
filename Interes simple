@@ -1,0 +1,22 @@
+Nombre: Jorge Andres Ibarra Mogro
+Fecha: 16 de agosto
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+void main()
+{
+	float capital, tasa, dias, interes;
+	cout<<"Ingrese su capital ";
+	cin>>capital;
+	cout<<"Ingerese la tasa de interes: ";
+	cin>>tasa;
+	cout<<"Ingrese dias trabajados " ;
+	cin>>dias;
+	interes=(capital*tasa*dias/100)/360;
+	cout<<"El interes simple es: "<<interes;
+	getch();
+}
