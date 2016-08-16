@@ -1,0 +1,26 @@
+//Nombre: Jorge Andres Ibarra Mogro
+//Fecha: 16 de agosto
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+void main()
+{
+	int n;
+	float precio, cantidad, total=0;
+	cout<<"Ingrese el numero de variedad de productos que vendio"<<endl;
+	cin>>n;
+	for(int i=0; i<n; i++)
+	{
+		cout<<"Ingrese el precio del "<< i+1<<"° producto: ";
+		cin>>precio;
+		cout<<"Ingrese la cantidad del mismo que vendio: ";
+		cin>>cantidad;
+		total=precio*cantidad+total;
+	}
+	cout<<"El total de venta es: "<< total;
+	getch();
+}
