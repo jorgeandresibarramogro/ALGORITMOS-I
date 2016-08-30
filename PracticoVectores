@@ -1,0 +1,71 @@
+// Nombre: Jorge Andres Ibarra Mogro
+// Fecha: 30 de agosto
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 100
+
+using namespace std;
+
+void cargar(double a[], int tam);
+void mostrar(double a[], int tam);
+void ordenar(double a[], int tam);
+void invertir(double a[], int tam);
+
+int main()
+{
+	int n;
+	double vec[MAX];
+	do{
+		cout<<"Ingrese el tamaño del vector entre 1 y 100: ";
+		cin>>n;
+	} while(n<=0 || n>100);
+	cout<<"Cargue el vector: "<<endl;
+	cargar(vec, n);
+	cout <<"El vector ordenado ascendentemente es: "<<endl;
+	ordenar(vec, n);
+	mostrar(vec, n);
+	cout <<"El vector ordenado descendentemente es: "<<endl;
+	invertir(vec, n);
+	mostrar(vec, n);
+	getch();
+	return 0;
+}
+
+void cargar(double a[], int tam)
+{
+	for(int i=0; i<tam; i++){
+		cout<<"Vec["<<i+1<<"]= ";
+		cin>>a[i];
+	}
+}
+
+void mostrar(double a[], int tam){
+	for(int i=0; i<tam; i++){
+		cout<<"Vec["<<i+1<<"]= "<<a[i]<<endl;
+	}
+}
+
+void ordenar(double a[], int tam)
+{
+	int c;
+	for(int i=0; i<tam; i++){
+		for(int j=0; j<tam; j++){
+			if(a[i]<a[j]){
+				c=a[i];
+				a[i]=a[j];
+				a[j]=c;
+			}
+		}
+	}
+}
+
+void invertir (double a[], int tamano){
+	double aux;
+	for(int i=0;i<tamano/2;i++){
+		aux=a[tamano-1-i];
+		a[tamano-1-i]=a[i];
+		a[i]=aux;
+	}
+}
