@@ -49,17 +49,109 @@ struct agreement
 	string time;
 };
 
-void principal()
+//ARCHIVOS
+/*void file_user()
+{
+	FILE*ptr;
+	ptr=fopen("user.dat","wb");
+	fclose(ptr);
+}
+void file_adm()
+{
+	FILE*ptr;
+	ptr=fopen("adm.dat","wb");
+	fclose(ptr);
+}
+void file_agreement()
+{
+	FILE*ptr;
+	ptr=fopen("agreement.dat","wb");
+	fclose(ptr);
+}
+*/
+
+//VALIDACIONES
+bool verif_solo_numeros(string cad)
+{
+	bool k=true;
+	int i=0;
+	while(i<cad.length()&&k==true)
+	{
+		if((cad[i]>='0')&&(cad[i]<='9'))
+		{
+			i++;
+		}
+		else
+		{
+			k=false;
+		}
+	}
+	if (cad.length()==0)
+	{
+		k=false;
+	}
+	return k;
+}
+
+//SUBMENU
+
+void signin()
 {
 	cout<<"\n_____________________________________________________________________________________________________________________\n";
 	cout<<"\n______________________BIENVENIDO A EASY MONEY___________________________________________________________________\n\n";
-	cout<<"______________________Busca el empleo que necesitas al instante!\n";
+	getch();
+}
+void login()
+{
+	cout<<"\n_____________________________________________________________________________________________________________________\n";
+	cout<<"\n______________________BIENVENIDO A EASY MONEY___________________________________________________________________\n\n";
+	cout<<"\n_____________________-.-Prueba gratuita de un mes*.*______________________________________________________________\n";
+	getch();
+}
+void adm()
+{
+	cout<<"\n_____________________________________________________________________________________________________________________\n";
+	cout<<"\n______________________BIENVENIDO A EASY MONEY___________________________________________________________________\n\n";
 
+}
+void privacy()
+{
+	cout<<"\n_____________________________________________________________________________________________________________________\n";
+	cout<<"\n______________________BIENVENIDO A EASY MONEY___________________________________________________________________\n\n";
+}
 
+void principal()
+{
+	string option;
+	int op;
+	do{
+		do{
+			cout<<"\n_____________________________________________________________________________________________________________________\n";
+			cout<<"\n______________________BIENVENIDO A EASY MONEY___________________________________________________________________\n\n";
+			cout<<"______________________Busca el empleo que necesitas al instante!\n";
+			cout<<"\n\n\n______________________1. Registrarse\n";
+			cout<<"______________________2. Iniciar sesion\n";
+			cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n3. Administrador\n";
+			cout<<"4. Politicas de Privacidad de Easy Money\n";
+			cout<<"0. Salir\n";
+			cout<<"Opcion:  ";
+			getline(cin, option);
+			system("cls");
+		} while(verif_solo_numeros(option)==false);
+		op=option.at(0);
+		switch(op)
+		{
+			case 1: signin(); break;
+			case 2: login(); break;
+			case 3: adm(); break;
+			case 4: privacy(); break;
+			case 0: cout<<"Cerrando programa, hasta pronto!\n"; break;
+			default: break;
+		}
+	} while(op!=0);
 	getch();
 }
 int main()
 {
 	principal();
 }
-
