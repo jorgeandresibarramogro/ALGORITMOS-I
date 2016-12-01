@@ -1,0 +1,65 @@
+// Easy_Money.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string>
+#include "conio.h"
+
+using namespace std;
+
+struct user
+{
+	int id;
+	string name;
+	string email;
+	string password;
+	string verify;
+	int edad;
+	int CI;
+	int cellphone;
+	string city;
+	string zone;
+	string state;
+	string country;
+	char status;
+};
+
+struct adm
+{
+	int id;
+	string name;
+	string email;
+	string code;
+	string verify;
+	int edad;
+	int CI;
+	int cellphone;
+	char status;
+};
+
+struct agreement
+{
+	int id;
+	string job;
+	int payment;
+	string hour;
+	string time;
+};
+
+void principal()
+{
+	cout<<"\n_____________________________________________________________________________________________________________________\n";
+	cout<<"\n______________________BIENVENIDO A EASY MONEY___________________________________________________________________\n\n";
+	cout<<"______________________Busca el empleo que necesitas al instante!\n";
+
+
+	getch();
+}
+int main()
+{
+	principal();
+}
+
