@@ -1,0 +1,3292 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include "conio.h"
+using namespace std;
+struct regProducto{
+    char nombre[30];
+    char estado;
+    int IdProd;
+    int stock;
+    float precio;
+};
+struct regVenta{
+    int IdVenta;
+    char fecha[12];
+    int cantidad;
+    int IdAuto;
+    char estado;
+	int IdBomba;
+	float preciounit;
+};
+struct regCliente{
+	int IdCliente;
+	char nombre[30];
+	char NIT[12];
+	char email[80];
+	char estado;
+};
+struct regVendedor{
+	int IdVendedor;
+	char nombre[30];
+	char telefono[12];
+	char email[80];
+	char estado;
+};
+struct regAutomovil{
+	int IdAutomovil;
+	char placa[10];
+	int IdCliente;
+	char estado;
+};
+struct regBomba{
+	int IdBomba;
+	char descripcion[30];
+	int IdProd;
+	int IdVendedor;
+	char estado;
+};
+struct regCompra{
+	int IdCompra;
+	char fecha[10];
+	int cantidad;
+	int IdProd;
+	char estado;
+};
+void crear(char a[]){
+    FILE *ptr;
+    ptr=fopen(a,"wb");
+    fclose(ptr);
+    system("cls");
+    cout<<"\t\tArchivo creado exitosamente !"<<endl;
+	cout<<"\t\tPRESIONE CUALQUIER TECLA PARA CONTINUAR...";
+    getch();
+    system("cls");
+}
+bool verifletrasynumeros(char a[]){
+	bool k=true;
+	for(int i=0;i<strlen(a);i++){
+		if(a[i]<=char(57)&&(a[i]>=char(48))){
+		}else{
+			if((a[i]<=char(90))&&(a[i]>=char(65))){
+			}else{
+				if((a[i]<=char(122))&&(a[i]>=char(97))){
+				
+				}else{
+					if(a[i]==' ' ){
+					
+					}else{
+					k=false;
+					}
+				}
+			}
+		}	
+	}
+	return k;
+}
+void liter(int n)
+{
+	int m;
+	if(n>=1000000)
+	{
+		m=n/1000000;
+		liter(m);
+		cout<<"millones ";
+		n=n%1000000;
+	}
+	if(n>=1000)
+	{
+		m=n/1000;
+		liter(m);
+		cout<<" mil ";
+		n=n%1000;
+	}
+	if(n>=100)
+	{
+		m=n/100;
+		switch(m)
+		{
+			case 1:
+			cout<<"ciento ";
+			break;
+			case 2:
+			cout<<"doscientos ";
+			break;
+			case 3:
+			cout<<"trescientos ";
+			break;
+			case 4:
+			cout<<"cuatrocientos ";
+			break;
+			case 5:
+			cout<<"quinientos ";
+			break;
+			case 6:
+			cout<<"seicientos ";
+			break;
+			case 7:
+			cout<<"setecientos ";
+			break;
+			case 8:
+			cout<<"ochocientos ";
+			break;
+			case 9:
+			cout<<"novecientos ";
+			break;
+		}
+		n=n%100;
+	}
+
+	if(n>0)
+	{
+		switch(n)
+		{
+			case 1:
+			cout<<"un ";
+			break;
+			case 2:
+			cout<<"dos ";
+			break;
+			case 3:
+			cout<<"tres ";
+			break;
+			case 4:
+			cout<<"cuatro ";
+			break;
+			case 5:
+			cout<<"cinco ";
+			break;
+			case 6:
+			cout<<"seis ";
+			break;
+			case 7:
+			cout<<"siete ";
+			break;
+			case 8:
+			cout<<"ocho ";
+			break;
+			case 9:
+			cout<<"nueve ";
+			break;
+			case 10:
+			cout<<"diez ";
+			break;
+			case 11:
+			cout<<"once ";
+			break;
+			case 12:
+			cout<<"doce ";
+			break;
+			case 13:
+			cout<<"trece ";
+			break;
+			case 14:
+			cout<<"catorce ";
+			break;
+			case 15:
+			cout<<"quince ";
+			break;
+			case 16:
+			cout<<"dieciseis ";
+			break;
+			case 17:
+			cout<<"diecisiete ";
+			break;
+			case 18:
+			cout<<"dieciocho ";
+			break;
+			case 19:
+			cout<<"diecinueve";
+			break;
+			case 20:
+			cout<<"veinte";
+			break;
+			case 21:
+			cout<<"ventiun";
+			break;
+			case 22:
+			cout<<"veintidos";
+			break;
+			case 23:
+			cout<<"veintitres";
+			break;
+			case 24:
+			cout<<"veinticuatro";
+			break;
+			case 25:
+			cout<<"veinticinco";
+			break;
+			case 26:
+			cout<<"veitiseis";
+			break;
+			case 27:
+			cout<<"veintisiete";
+			break;
+			case 28:
+			cout<<"ventiocho";
+			break;
+			case 29:
+			cout<<"ventinueve";
+			break;
+			case 30:
+			cout<<"treinta";
+			break;
+			case 31:
+			cout<<"treinta y un";
+			break;
+			case 32:
+			cout<<"treinta y dos";
+			break;
+			case 33:
+			cout<<"treinta y tres";
+			break;
+			case 34:
+			cout<<"treinta y cuatro";
+			break;
+			case 35:
+			cout<<"treinta y cinco";
+			break;
+			case 36:
+			cout<<"treinta y seis";
+			break;
+			case 37:
+			cout<<"treinta y siete";
+			break;
+			case 38:
+			cout<<"treinta y ocho";
+			break;
+			case 39:
+			cout<<"treinta y nueve";
+			break;
+			case 40:
+			cout<<"cuarenta";
+			break;
+			case 41:
+			cout<<"cuarenta y un";
+			break;
+			case 42:
+			cout<<"cuarenta y dos";
+			break;
+			case 43:
+			cout<<"cuarenta y tres";
+			break;
+			case 44:
+			cout<<"cuarenta y cuatro";
+			break;
+			case 45:
+			cout<<"cuarenta y cinco";
+			break;
+			case 46:
+			cout<<"cuarenta y seis";
+			break;
+			case 47:
+			cout<<"cuarenta y siete";
+			break;
+			case 48:
+			cout<<"cuarenta y ocho";
+			break;
+			case 49:
+			cout<<"cuarenta y nueve";
+			break;
+			case 50:
+			cout<<"cincuenta";
+			break;
+			case 51:
+			cout<<"cincuenta y un";
+			break;
+			case 52:
+			cout<<"cincuenta y dos";
+			break;
+			case 53:
+			cout<<"cincuenta y tres";
+			break;
+			case 54:
+			cout<<"cincuenta y cuatro";
+			break;
+			case 55:
+			cout<<"cincuenta y cinco";
+			break;
+			case 56:
+			cout<<"cincuenta y seis";
+			break;
+			case 57:
+			cout<<"cincuenta y siete";
+			break;
+			case 58:
+			cout<<"cincuenta y ocho";
+			break;
+			case 59:
+			cout<<"cincuenta y nueve";
+			break;
+			case 60:
+			cout<<"sesenta";
+			break;
+			case 61:
+			cout<<"sesenta y un";
+			break;
+			case 62:
+			cout<<"sesenta y dos";
+			break;
+			case 63:
+			cout<<"sesenta y tres";
+			break;
+			case 64:
+			cout<<"sesenta y cuatro";
+			break;
+			case 65:
+			cout<<"sesenta y cinco";
+			break;
+			case 66:
+			cout<<"sesenta y seis";
+			break;
+			case 67:
+			cout<<"sesenta y siete";
+			break;
+			case 68:
+			cout<<"sesenta y ocho";
+			break;
+			case 69:
+			cout<<"sesenta y nueve";
+			break;
+			case 70:
+			cout<<"setenta";
+			break;
+			case 71:
+			cout<<"setenta y un";
+			break;
+			case 72:
+			cout<<"setenta y dos";
+			break;
+			case 73:
+			cout<<"setenta y tres";
+			break;
+			case 74:
+			cout<<"setenta y cuatro";
+			break;
+			case 75:
+			cout<<"setenta y cinco";
+			break;
+			case 76:
+			cout<<"setenta y seis";
+			break;
+			case 77:
+			cout<<"setenta y siete";
+			break;
+			case 78:
+			cout<<"setenta y ocho";
+			break;
+			case 79:
+			cout<<"setenta y nueve";
+			break;
+			case 80:
+			cout<<"ochenta";
+			break;
+			case 81:
+			cout<<"ochenta y un";
+			break;
+			case 82:
+			cout<<"ochenta y dos";
+			break;
+			case 83:
+			cout<<"ochenta y tres";
+			break;
+			case 84:
+			cout<<"ochenta y cuatro";
+			break;
+			case 85:
+			cout<<"ochenta y cinco";
+			break;
+			case 86:
+			cout<<"ochenta y seis";
+			break;
+			case 87:
+			cout<<"ochenta y siete";
+			break;
+			case 88:
+			cout<<"ochenta y ocho";
+			break;
+			case 89:
+			cout<<"ochenta y nueve";
+			break;
+			case 90:
+			cout<<"noventa";
+			break;
+			case 91:
+			cout<<"noventa y un";
+			break;
+			case 92:
+			cout<<"noventa y dos";
+			break;
+			case 93:
+			cout<<"noventa y tres";
+			break;
+			case 94:
+			cout<<"noventa y cuatro";
+			break;
+			case 95:
+			cout<<"noventa y cinco";
+			break;
+			case 96:
+			cout<<"noventa y seis";
+			break;
+			case 97:
+			cout<<"noventa y siete";
+			break;
+			case 98:
+			cout<<"noventa y ocho";
+			break;
+			case 99:
+			cout<<"noventa y nueve";
+
+		}
+	}
+}
+int obtNroReg(int n,char a[])
+{
+	int nroReg;
+	bool bandera=false;
+	FILE *ptr;
+	regProducto reg;
+	ptr=fopen(a,"rb");
+	fread(&reg,sizeof(reg),1,ptr);
+	int c=1;
+	while((feof(ptr)==false)&&(bandera==false)){
+
+		if(reg.IdProd==n){
+			bandera=true;
+			nroReg=c;
+		}
+		c++;
+		fread(&reg,sizeof(reg),1,ptr);
+
+	}								
+	return nroReg;
+}
+int obtNroRegC(int n,char a[]){
+	int nroReg;
+	FILE *ptr;
+	regCliente reg;
+	ptr=fopen(a,"rb");
+	int c=0;
+	while(feof(ptr)==false){
+		fread(&reg,sizeof(reg),1,ptr);
+		c++;
+		if(reg.IdCliente==n){
+			nroReg=c;
+		}
+	}
+
+									
+	return nroReg;
+}
+int obtNroRegV(int n,char a[]){
+	int nroReg;
+	FILE *ptr;
+	regVendedor reg;
+	ptr=fopen(a,"rb");
+	int c=0;
+	while(feof(ptr)==false){
+		fread(&reg,sizeof(reg),1,ptr);
+		c++;
+		if(reg.IdVendedor==n){
+			nroReg=c;
+		}
+	}
+
+									
+	return nroReg;
+}
+int obtNroRegA(int n,char a[]){
+	int nroReg;
+	FILE *ptr;
+	regAutomovil reg;
+	ptr=fopen(a,"rb");
+	int c=0;
+	while(feof(ptr)==false){
+		fread(&reg,sizeof(reg),1,ptr);
+		c++;
+		if(reg.IdAutomovil==n){
+			nroReg=c;
+		}
+	}
+
+									
+	return nroReg;
+}
+int obtNroRegB(int n,char a[]){
+	int nroReg;
+	FILE *ptr;
+	regBomba reg;
+	ptr=fopen(a,"rb");
+	int c=0;
+	while(feof(ptr)==false){
+		fread(&reg,sizeof(reg),1,ptr);
+		c++;
+		if(reg.IdBomba==n){
+			nroReg=c;
+		}
+	}
+
+									
+	return nroReg;
+}
+int obtNroRegCO(int n,char a[]){
+	int nroReg;
+	FILE *ptr;
+	regCompra reg;
+	ptr=fopen(a,"rb");
+	int c=0;
+	while(feof(ptr)==false){
+		fread(&reg,sizeof(reg),1,ptr);
+		c++;
+		if(reg.IdCompra==n){
+			nroReg=c;
+		}
+	}
+
+									
+	return nroReg;
+}
+bool verifprod(int n){
+    bool k=false;
+    FILE *ptr;
+    regProducto reg;
+    ptr=fopen("productos.dat","rb");
+    fread(&reg,sizeof(reg),1,ptr);
+    while(feof(ptr)==false){
+        if((reg.IdProd==n)&&(reg.estado=='A')){
+        k=true;
+        }
+    fread(&reg,sizeof(reg),1,ptr);
+    }
+    fclose(ptr);
+    return k;
+
+}
+void adicionar_producto(){
+    FILE *ptr;
+    regProducto reg,regA;
+    system("cls");
+	ptr=fopen("productos.dat","rb");
+    if(ptr==NULL){
+        cout<<"EL ARCHIVO NO EXISTE!";
+    }else{
+        do{
+		cout<<"Introduzca el Id De producto: ";
+        while (!(cin >>reg.IdProd))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero : " << endl;
+		}	
+		if(verifprod(reg.IdProd)==true){
+		cout<<"El ID de producto ya existe!\n";
+		}else{
+			if((reg.IdProd<100)||(reg.IdProd>199)){
+				cout<<"EL ID TIENE QUE ESTAR EN EL RANGO <100/199>\n";
+			}
+		}
+		}while((verifprod(reg.IdProd)==true)||(reg.IdProd<100)||(reg.IdProd>199));
+		fclose(ptr);
+        do{
+		cout<<"Introduzca el nombre del producto: ";
+        do{
+        gets(reg.nombre);
+        }while(strlen(reg.nombre)==0);
+		}while(verifletrasynumeros(reg.nombre)==false);
+        do{
+		cout<<"Introduzca el stock: ";
+        while (!(cin >>reg.stock))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(reg.stock<1){
+			cout<<"El stock no puede ser menor a 1!\n";
+		}
+		}while(reg.stock<1);
+        do{
+		cout<<"Introduzca el precio: ";
+        while (!(cin >>reg.precio))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(reg.precio<0){
+			cout<<"El precio no puede ser menor a 0!\n";
+		}
+		}while(reg.precio<0);
+        reg.estado ='A';
+	    ptr=fopen("productos.dat","ab");
+        fwrite(&reg,sizeof(reg),1,ptr);
+        fclose(ptr);
+        }
+	cout<<"\t\tPRESIONE CUALQUIER TECLA PARA CONTINUAR...";
+    getch();
+    system("cls");
+}
+void listado_producto(){
+        FILE *ptr;
+    int c=1;
+    regProducto reg;
+    system("cls");
+    ptr=fopen("productos.dat","rb");
+    if(ptr != NULL){
+    fread(&reg,sizeof(reg),1,ptr);
+    cout<<"\n=================================================";
+    cout<<"\n\t\tLISTADO PRODUCTOS\n\n";
+    cout<<"----------------------------------------------------\n";
+    cout<<"#\tID\tNOMBRE\t\tSTOCK\tPRECIO\n\n";
+    while(feof(ptr)==false){
+      if(reg.estado=='A'){
+        cout<<c++<<"\t"<<reg.IdProd<<"\t"<<reg.nombre<<"\t\t"<<reg.stock<<"\t"<<reg.precio<<"\n";
+       }
+        fread(&reg,sizeof(reg),1,ptr);
+    }
+    
+    cout<<"====================================================\n";
+
+	    fclose(ptr);
+	}else{cout<<"EL ARCHIVO NO EXISTE!";}
+	cout<<"\t\tPRESIONE CUALQUIER TECLA PARA CONTINUAR...";
+    getch();
+    system("cls");
+
+}
+bool veriffecha(char a[]){
+	bool k=false,p=false,bandera_dia=true,bandera_mes=true,bandera=false;
+	int aux[5],c=0,dia[5],mes[5],anho[5],ndia,nmes,nanho,DD=0,MM=0,AAAA=0;
+	if(strlen(a)==10){
+	for(int i=0;i<strlen(a);i++){
+		if(a[i]==' '){
+			cout<<"La Fecha no puede tener espacios!!\n";
+				i=strlen(a);
+			p=true;
+		}else{
+			if((a[i]!='0')&&(a[i]!='1')&&(a[i]!='2')&&(a[i]!='3')&&(a[i]!='4')&&(a[i]!='5')&&(a[i]!='6')&&(a[i]!='7')&&(a[i]!='8')&&(a[i]!='9')&&(a[i]!='/')){
+				cout<<" La fecha solo puede estar compuesta de numeros o del simbolo '/' \n";
+				i=strlen(a);
+				p=true;
+			}
+		}
+	}
+	if(p==false){
+		for(int i=0;i<strlen(a);i++){
+			if(a[i]!='/'){
+				aux[c++]=a[i]-48;
+			}else{
+				if(bandera_dia==true){
+					for(int j=0;j<c;j++){
+						dia[j]=aux[j];
+						ndia=c;
+					}
+					c=0;
+					bandera_dia=false;
+				}else{
+					if(bandera_mes==true){
+						for(int j=0;j<c;j++){
+							mes[j]=aux[j];
+							nmes=c;
+						}
+						c=0;
+						bandera_mes=false;	
+					}
+				}
+			}
+		}
+		for(int j=0;j<c;j++){
+			anho[j]=aux[j];
+			nanho=c;
+		}
+	}
+
+	if((ndia!=2)||(nmes!=2)||(nanho!=4)){
+		cout<<"ERROR la cantidad de caracteres n no es correcta!!\n";
+	}else{
+		for(int i=0;i<ndia;i++){
+			DD=DD*10+dia[i];
+		}
+		for(int i=0;i<nmes;i++){
+			MM=MM*10+mes[i];
+		}
+		for(int i=0;i<nanho;i++){
+			AAAA=AAAA*10+anho[i];
+		}
+	}
+	//VALIDACIONES DE DIAS MESES Y AÑOS
+	if(DD<1){
+		cout<<"EL dia no puede ser menor a 1 !\n";
+	}else{
+	if(AAAA>2016){
+		cout<<"El anho no puede ser despues del 2016!\n";
+	}else{
+		if(AAAA<1990){
+			cout<<"El anho no puede ser de antes del 1990!!\n";
+		}else{
+			if(MM<1){
+				cout<<"El mes no puede ser 0 o menor a 1!\n";
+			}else{
+				if(MM>12){
+					cout<<"El mes no puede ser mayor a 12!\n";
+				}else{
+					if((MM==1)&&(DD>31)){
+						cout<<"Enero Solo tiene 31 dias!\n";
+					}else{//
+					if((MM==3)&&(DD>31)){
+						cout<<"Marzo solo tiene 31 dias !\n";
+					}else{
+						if((MM==5)&&(DD>31)){
+							cout<<"Mayo solo tiene 31 dias!\n";
+						}else{
+							if((MM==7)&&(DD>31)){
+								cout<<"Julio solo tiene 31 dias!\n";
+							}else{
+								if((MM==8)&&(DD>31)){
+									cout<<"Agosto solo tiene 31 dias!\n";
+								}else{
+									if((MM==10)&&(DD>31)){
+										cout<<"Octubre solo tiene 31 dias!\n";
+									}else{
+										if((MM==12)&&(DD>31)){
+											cout<<"Diciembre solo tiene 31 dias!\n";
+										}else{
+											if((AAAA!=1992)&&(AAAA!=1996)&&(AAAA!=2000)&&(AAAA!=2004)&&(AAAA!=2008)&&(AAAA!=2012)&&(AAAA!=2016)&&(MM==2)&&(DD>28)){
+												cout<<"En el anho que escogio febrero solo tuvo 28 dias\n";
+											}else{
+												if((MM==2)&&(DD>29)){
+													cout<<"Febrero solo tiene 29 dias!\n";
+												}else{
+													if((MM==4)&&(DD>30)){
+														cout<<"Abril solo tiene 30 dias!\n";
+													}else{
+														if((MM==6)&&(DD>30)){
+															cout<<"Junio solo tiene 30 dias!\n";
+														}else{
+															if((MM==9)&&(DD>30)){
+																cout<<"Septiembre solo tiene 30 dias!\n";
+															}else{
+																if((MM==11)&&(DD>30)){
+																	cout<<"Noviembre solo tiene 30 dias!\n";
+																}else{
+																	bandera=true;
+																}
+															}
+														}
+													}
+												}	
+											}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				}
+		}
+		}
+	}
+
+	//CIERRA VALIDACIONES DIAS MESES Y AÑOS
+	if(bandera==true){
+		k=true;
+	}
+	}else{
+		cout<<"ERROR la cantidad de caracteres no es correcta!!\n";
+	}
+	return k;
+}
+bool verifventa(int n){
+	bool k=false;
+    FILE *ptr;
+    regVenta reg;
+    ptr=fopen("ventas.dat","rb");
+    fread(&reg,sizeof(reg),1,ptr);
+    while(feof(ptr)==false){
+        if((reg.IdVenta==n)&&(reg.estado=='A')){
+        k=true;
+        }
+    fread(&reg,sizeof(reg),1,ptr);
+    }
+    fclose(ptr);
+    return k;
+}
+bool verificar_cantidad_menor_stock(int n,int id){
+	bool k=false;
+    FILE *ptr;
+    regProducto reg;
+    ptr=fopen("productos.dat","rb");
+    fread(&reg,sizeof(reg),1,ptr);
+    while(feof(ptr)==false){
+        if((reg.IdProd==id)&&(reg.estado=='A')&&(n<reg.stock)){
+			k=true;
+        }
+    fread(&reg,sizeof(reg),1,ptr);
+    }
+    fclose(ptr);
+    return k;
+}
+void restar_cant_stock(int n,int id){
+    FILE *ptr;
+	int c=0;
+    regProducto reg;
+    ptr=fopen("productos.dat","r+b");
+    fread(&reg,sizeof(reg),1,ptr);
+    while(feof(ptr)==false){
+        if((reg.IdProd==id)&&(reg.estado=='A')){
+			reg.stock=reg.stock-n;
+			fseek(ptr,c*sizeof(reg),SEEK_SET);
+			fwrite(&reg,sizeof(reg),1,ptr);
+			fseek(ptr,0,SEEK_END);
+        }
+    fread(&reg,sizeof(reg),1,ptr);
+	c++;
+    }
+    fclose(ptr);
+
+}
+regProducto obtProducto(int n){
+    FILE *ptr;
+    regProducto reg;
+	bool bandera=false;
+    ptr=fopen("productos.dat","rb");
+    if(ptr!=NULL){
+        fread(&reg,sizeof(reg),1,ptr);
+        while((feof(ptr)==false)&&(bandera==false)){
+			fread(&reg,sizeof(reg),1,ptr);
+            if((reg.estado=='A')&&(reg.IdProd==n))
+				bandera=true;
+        }
+        fclose(ptr);
+    }
+    return reg;
+}
+void obtvecIDS(int vec[],int &n,int id){
+	n=0;
+	FILE *ptr;
+	regCompra reg;
+	ptr=fopen("compras.dat","rb");
+	if(ptr!=NULL){
+		while(feof(ptr)==false){
+			fread(&reg,sizeof(reg),1,ptr);
+			if((reg.estado=='A')&&(reg.IdProd==id)){
+				vec[n++]=reg.IdCompra;
+			}
+		}
+	fclose(ptr);
+	}
+}
+void eliminar_compras_relacionadas(int id){
+	FILE*ptr;
+	int vecIDS[20],nv,nroReg;
+	regCompra reg;
+	obtvecIDS(vecIDS,nv,id);
+	ptr=fopen("compras.dat","r+b");
+	for(int i=0;i<nv;i++){
+		nroReg=obtNroRegCO(vecIDS[i],"compras.dat");
+		fseek(ptr,(nroReg-1)*sizeof(reg),SEEK_SET);
+		fread(&reg,sizeof(reg),1,ptr);
+	}
+
+
+	
+}
+void borrar_registro_producto(){
+	FILE *ptr;
+	int n,nroReg;
+	bool bandera=false;
+	char opc;
+	regProducto regP;
+	system("cls");
+	do{
+		cout<<"Introduzca el ID del producto que desea eliminar: \n";
+		while (!(cin >>n))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			//cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(verifprod(n)==false){
+			cout<<"No existe ningun producto con el ID ingresado!\n";
+		}else{
+			regP=obtProducto(n);
+			cout<<"Este es el registro que desea eliminar: \n\n";
+			cout<<regP.IdProd<<"\t"<<regP.nombre<<"\t\t"<<regP.stock<<"\t"<<regP.precio<<"\n";
+			cin>>opc;
+			cout<<endl;
+			if((opc=='S')||(opc=='s')){
+				bandera=true;
+				//eliminar_compras_relacionadas(regP.IdProd);
+				regP.estado='E';
+				nroReg=obtNroReg(n,"productos.dat");
+				ptr=fopen("productos.dat","r+b");
+				fseek(ptr,(nroReg-1)*sizeof(regP),SEEK_SET);
+				fwrite(&regP,sizeof(regP),1,ptr);
+				fclose(ptr);
+			}
+		}
+	}while(bandera==false);
+	system("cls");
+	cout<<"Registro eliminado exitosamente!\nPresione cualquier boton para continuar...\n";
+	getch();
+	system("cls");
+}
+void modificar_registro_producto(){
+	FILE *ptr;
+	int n,nroReg;
+	bool bandera=false;
+	char opc;
+	regProducto regP;
+	system("cls");
+	do{
+		cout<<"Introduzca el ID del producto que desea modificar: \n";
+		while (!(cin >>n))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			//cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(verifprod(n)==false){
+			cout<<"No existe ningun producto con el ID ingresado!\n";
+		}else{
+			regP=obtProducto(n);
+			cout<<"Este es el registro que desea eliminar: \n\n";
+			cout<<regP.IdProd<<"\t"<<regP.nombre<<"\t\t"<<regP.stock<<"\t"<<regP.precio<<"\n";
+			cin>>opc;
+			cout<<endl;
+			if((opc=='S')||(opc=='s')){
+				bandera=true;
+				ptr=fopen("productos.dat","rb");
+    if(ptr==NULL){
+        cout<<"EL ARCHIVO NO EXISTE!";
+    }else{
+        do{
+		cout<<"Introduzca el Id De producto: ";
+        while (!(cin >>regP.IdProd))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero : " << endl;
+		}	
+		if(verifprod(regP.IdProd)==true){
+		cout<<"El ID de producto ya existe!\n";
+		}else{
+			if((regP.IdProd<100)||(regP.IdProd>199)){
+				cout<<"EL ID TIENE QUE ESTAR EN EL RANGO <100/199>\n";
+			}
+		}
+		}while((verifprod(regP.IdProd)==true)||(regP.IdProd<100)||(regP.IdProd>199));
+		fclose(ptr);
+        cout<<"Introduzca el nombre del producto: ";
+        do{
+        gets(regP.nombre);
+        }while(strlen(regP.nombre)==0);
+        do{
+		cout<<"Introduzca el stock: ";
+        while (!(cin >>regP.stock))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(regP.stock<1){
+			cout<<"El stock no puede ser menor a 1!\n";
+		}
+		}while(regP.stock<1);
+        do{
+		cout<<"Introduzca el precio: ";
+        while (!(cin >>regP.precio))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(regP.precio<0){
+			cout<<"El precio no puede ser menor a 0!\n";
+		}
+		}while(regP.precio<0);
+        regP.estado ='A';
+        }
+				nroReg=obtNroReg(n,"productos.dat");
+				ptr=fopen("productos.dat","r+b");
+				fseek(ptr,(nroReg-1)*sizeof(regP),SEEK_SET);
+				fwrite(&regP,sizeof(regP),1,ptr);
+				fclose(ptr);
+			}
+		}
+	}while(bandera==false);
+	system("cls");
+	cout<<"Registro modificado exitosamente!\nPresione cualquier boton para continuar...\n";
+	getch();
+	system("cls");
+}
+void Menu_Productos(){
+		int opc=0;
+	do{
+	cout<<"================================================================================\n";
+	cout<<"\t  *****  M E N U     P R O D U C T O  *****\n\n";
+	cout<<"================================================================================\n";
+	cout<<"\t1.- Crear Archivo\n";
+	cout<<"\t2.- Adicionar registro al archivo\n";
+	cout<<"\t3.- Borrar un registro\n";
+	cout<<"\t4.- Modificar un registro\n";
+	cout<<"\t5.- Listado\n";
+	cout<<"\t0.- Atras\n";
+		while (!(cin >>opc))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero entero: " << endl;
+		}
+		switch(opc){
+			case 1: 
+				crear("productos.dat");
+				break;
+			case 2:
+				adicionar_producto();
+				break;
+			case 3: 
+				borrar_registro_producto();
+				break;
+			case 4: 
+				modificar_registro_producto();
+				break;
+			case 5: 
+				listado_producto();
+				break;
+			default :
+				system("cls");
+				if(opc!=0){
+				cout<<"ERROR OPCION INCORRECTA!\n\n";
+				}
+				break;
+
+		}
+	}while(opc!=0);
+}
+bool verifcliente(int n){
+	FILE *ptr;
+	bool k=false;
+	regCliente reg;
+	ptr=fopen("clientes.dat","rb");
+		fread(&reg,sizeof(reg),1,ptr);
+		while(feof(ptr)==false){
+			if((reg.IdCliente==n)&&(reg.estado=='A')){
+				k=true;
+			}
+			fread(&reg,sizeof(reg),1,ptr);
+		}
+	fclose(ptr);
+	return k;
+}
+bool verifnombre(char nombre[]){
+	bool k=true;
+	for(int i=0;i<strlen(nombre);i++){
+		if((nombre[i]=='1')||(nombre[i]=='2')||(nombre[i]=='3')||(nombre[i]=='4')||(nombre[i]=='5')||(nombre[i]=='6')||(nombre[i]=='7')||(nombre[i]=='8')||(nombre[i]=='9')||(nombre[i]=='0')){
+			k=false;
+		}
+	}
+	if(k==false)
+		cout<<"El nombre no puede tener numeros!\n";
+	return k;
+}
+bool verifNIT(char NIT[]){
+	bool k=true;
+	for(int i=0;i<strlen(NIT);i++){
+		if((NIT[i]!='1')&&(NIT[i]!='2')&&(NIT[i]!='3')&&(NIT[i]!='4')&&(NIT[i]!='5')&&(NIT[i]!='6')&&(NIT[i]!='7')&&(NIT[i]!='8')&&(NIT[i]!='9')&&(NIT[i]!='0')){
+			k=false;		
+		}
+	}
+	if(k==false){cout<<"El NIT solo puede estar compuesto de numeros!\n";}
+	return k;
+}
+bool verifemail(char email[]){
+	bool k=true,bandera=false;
+	int n=strlen(email);
+	if((email[n-1]!='m')||(email[n-2]!='o')||(email[n-3]!='c')||(email[n-4]!='.')){
+		k=false;
+		cout<<"El email debe terminar en '.com' !\n";
+	}else{
+		for(int i=0;i<n-1;i++){
+			if(email[i]=='@'){
+				bandera=true;
+			}
+		}
+		if(bandera==false){
+			cout<<"el email debe contener el caracter : '@' \n";
+			k=false;
+		}
+	}
+	
+	return k;
+}
+void adicionar_cliente (){
+	FILE *ptr;
+	system("cls");
+	regCliente reg;
+	ptr=fopen("clientes.dat","ab");
+	if(ptr!=NULL){
+		do{
+			cout<<"Introduzca el ID De cliente:\n\t <200-299>\n";
+			 while (!(cin >>reg.IdCliente))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			if(verifcliente(reg.IdCliente)==true){
+				cout<<"Ya existe un Cliente con ese ID !\n";
+			}
+		}while((verifcliente(reg.IdCliente)==true)||(reg.IdCliente<200)||(reg.IdCliente>299));
+		do{
+			cout<<"Introduzca el nombre del Cliente: \n";
+			do{
+				gets(reg.nombre);
+			}while(strlen(reg.nombre)==0);
+		}while((verifletrasynumeros(reg.nombre)==false)||(verifnombre(reg.nombre)==false));
+		do{
+			cout<<"Introduzca el numero de NIT: \n";
+			do{
+				gets(reg.NIT);
+			}while(strlen(reg.NIT)==0);
+		}while(verifNIT(reg.NIT)==false);
+		do{
+			cout<<"Introduzca el email :\n";
+			do{
+				gets(reg.email);
+			}while(strlen(reg.email)==0);
+		}while(verifemail(reg.email)==false);
+		reg.estado='A';
+		fwrite(&reg,sizeof(reg),1,ptr);
+		fclose(ptr);
+		system("cls");
+		cout<<"El registro ha sido creado exitosamente \nPresione cualquier tecla para continuar ...";
+		}else{
+		cout<<"El Archivo no existe !\nPresione cualquier tecla para continuar ...";
+	}
+	getch();
+	system("cls");
+}
+regCliente obtCliente(int n){
+	FILE *ptr;
+    regCliente reg;
+	bool bandera =false;
+    ptr=fopen("clientes.dat","rb");
+    if(ptr!=NULL){
+        while((feof(ptr)==false)&&(bandera==false)){
+			fread(&reg,sizeof(reg),1,ptr);
+            if((reg.IdCliente==n)&&(reg.estado=='A')){
+				bandera=true;  
+			}     
+
+		}
+        fclose(ptr);
+    }
+    return reg;
+}
+void borrar_registro_cliente(){
+	FILE *ptr;
+	int n,nroReg;
+	bool bandera=false;
+	char opc;
+	regCliente reg;
+	system("cls");
+	do{
+		cout<<"Introduzca el ID del Cliente que desea eliminar: \n";
+		while (!(cin >>n))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			//cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(verifcliente(n)==false){
+			cout<<"No existe ningun producto con el ID ingresado!\n";
+		}else{
+			reg=obtCliente(n);
+			cout<<"Este es el registro que desea eliminar: \n\n";
+			cout<<reg.IdCliente<<"\t"<<reg.nombre<<"\t\t"<<reg.NIT<<"\t"<<reg.email
+				<<"\n";
+			cin>>opc;
+			cout<<endl;
+			if((opc=='S')||(opc=='s')){
+				bandera=true;
+				reg.estado='E';
+				nroReg=obtNroRegC(n,"clientes.dat");
+				ptr=fopen("clientes.dat","r+b");
+				fseek(ptr,(nroReg-1)*sizeof(reg),SEEK_SET);
+				fwrite(&reg,sizeof(reg),1,ptr);
+				fclose(ptr);
+			}
+		}
+	}while(bandera==false);
+	system("cls");
+	cout<<"Registro eliminado exitosamente!\nPresione cualquier boton para continuar...\n";
+	getch();
+	system("cls");
+}
+void modificar_registro_cliente(){
+	FILE *ptr;
+	int n,nroReg;
+	bool bandera=false;
+	char opc;
+	regCliente reg;
+	system("cls");
+	do{
+		cout<<"Introduzca el ID del Cliente que desea modificar: \n";
+		while (!(cin >>n))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			//cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(verifcliente(n)==false){
+			cout<<"No existe ningun Cliente con el ID ingresado!\n";
+		}else{
+			reg=obtCliente(n);
+			cout<<"Este es el registro que desea eliminar: \n\n";
+			cout<<reg.IdCliente<<"\t"<<reg.nombre<<"\t\t"<<reg.NIT<<"\t"<<reg.email<<"\n";
+			cin>>opc;
+			cout<<endl;
+			if((opc=='S')||(opc=='s')){
+				bandera=true;
+				ptr=fopen("clientes.dat","rb");
+    if(ptr==NULL){
+        cout<<"EL ARCHIVO NO EXISTE!";
+    }else{
+        do{
+		cout<<"Introduzca el Id De Cliente: ";
+        while (!(cin >>reg.IdCliente))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero : " << endl;
+		}	
+		if(verifcliente(reg.IdCliente)==true){
+		cout<<"El ID de Cliente ya existe!\n";
+		}else{
+			if((reg.IdCliente<200)||(reg.IdCliente>299)){
+				cout<<"EL ID TIENE QUE ESTAR EN EL RANGO <200/299>\n";
+			}
+		}
+		}while((verifcliente(reg.IdCliente)==true)||(reg.IdCliente<200)||(reg.IdCliente>299));
+		fclose(ptr);
+		do{
+        cout<<"Introduzca el nombre del Cliente: \n";
+			do{
+				gets(reg.nombre);
+			}while(strlen(reg.nombre)==0);
+		}while(verifnombre(reg.nombre)==false);
+		do{
+			cout<<"Introduzca el numero de NIT: \n";
+			do{
+				gets(reg.NIT);
+			}while(strlen(reg.NIT)==0);
+		}while(verifNIT(reg.NIT)==false);
+		do{
+			cout<<"Introduzca el email :\n";
+			do{
+				gets(reg.email);
+			}while(strlen(reg.email)==0);
+		}while(verifemail(reg.email)==false);
+		reg.estado='A';
+        }
+				nroReg=obtNroRegC(n,"clientes.dat");
+				ptr=fopen("clientes.dat","r+b");
+				fseek(ptr,(nroReg-1)*sizeof(reg),SEEK_SET);
+				fwrite(&reg,sizeof(reg),1,ptr);
+				fclose(ptr);
+			}
+		}
+	}while(bandera==false);
+	system("cls");
+	cout<<"Registro modificado exitosamente!\nPresione cualquier boton para continuar...\n";
+	getch();
+	system("cls");
+}
+void listado_cliente(){
+      FILE *ptr;
+    int c=1;
+    regCliente reg;
+    system("cls");
+    ptr=fopen("clientes.dat","rb");
+    if(ptr != NULL){
+    fread(&reg,sizeof(reg),1,ptr);
+    cout<<"\n=================================================";
+    cout<<"\n\t\tLISTADO CLIENTES\n\n";
+    cout<<"----------------------------------------------------\n";
+    cout<<"#\tID\tNOMBRE\t\tNIT\tEMAIL\n\n";
+    while(feof(ptr)==false){
+      if(reg.estado=='A'){
+        cout<<c++<<"\t"<<reg.IdCliente<<"\t"<<reg.nombre<<"\t\t"<<reg.NIT<<"\t"<<reg.email<<"\n";
+       }
+        fread(&reg,sizeof(reg),1,ptr);
+    }
+    
+    cout<<"====================================================\n";
+
+	    fclose(ptr);
+	}else{cout<<"EL ARCHIVO NO EXISTE!";}
+	cout<<"\t\tPRESIONE CUALQUIER TECLA PARA CONTINUAR...";
+    getch();
+    system("cls");
+
+}
+void Menu_Clientes(){
+	int opc=0;
+	do{
+	cout<<"================================================================================\n";
+	cout<<"\t  *****  M E N U     C L I E N T E  *****\n\n";
+	cout<<"================================================================================\n";
+	cout<<"\t1.- Crear Archivo\n";
+	cout<<"\t2.- Adicionar registro al archivo\n";
+	cout<<"\t3.- Borrar un registro\n";
+	cout<<"\t4.- Modificar un registro\n";
+	cout<<"\t5.- Listado\n";
+	cout<<"\t0.- Atras\n";
+		while (!(cin >>opc))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero entero: " << endl;
+		}
+		switch(opc){
+			case 1: 
+				crear("clientes.dat");
+				break;
+			case 2:
+				adicionar_cliente();
+				break;
+			case 3: 
+				borrar_registro_cliente();
+				break;
+			case 4: 
+				modificar_registro_cliente();
+				break;
+			case 5: 
+				listado_cliente();
+				break;
+			default :
+				system("cls");
+				if(opc!=0){
+				cout<<"ERROR OPCION INCORRECTA!\n\n";
+				}
+				break;
+
+		}
+	}while(opc!=0);}
+bool verifvendedor(int n){
+	bool k=false;
+	FILE *ptr;
+	regVendedor reg;
+	ptr=fopen("vendedores.dat","rb");
+	while(feof(ptr)==false){
+		if((reg.IdVendedor==n)&&(reg.estado=='A')){
+			k=true;
+		}
+		fread(&reg,sizeof(reg),1,ptr);
+	}
+		return k;
+}
+bool verif_telefono(char t[]){
+	bool k=true;
+	for(int i=0;i<strlen(t);i++){
+		if((t[i]!='1')&&(t[i]!='2')&&(t[i]!='3')&&(t[i]!='4')&&(t[i]!='5')&&(t[i]!='6')&&(t[i]!='7')&&(t[i]!='8')&&(t[i]!='9')&&(t[i]!='0')&&(t[i]!='+')&&(t[i]!=' ')){
+			k=false;
+		}
+	}
+		if(k==false){
+			cout<<"El numero de telefono solo puede estar compuesto de numero, espacio ' ' y '+'\n";
+		}
+		return k;
+}
+void adicionar_vendedor(){
+	FILE *ptr;
+	system("cls");
+	regVendedor reg;
+	ptr=fopen("vendedores.dat","ab");
+	if(ptr!=NULL){
+		do{
+			cout<<"Introduzca el ID De Vendedor:\n\t <300-399>\n";
+			 while (!(cin >>reg.IdVendedor))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			if(verifvendedor(reg.IdVendedor)==true){
+				cout<<"Ya existe un Vendedor con ese ID !\n";
+			}
+		}while((verifvendedor(reg.IdVendedor)==true)||(reg.IdVendedor<300)||(reg.IdVendedor>399));
+		do{
+			cout<<"Introduzca el nombre del Vendedor: \n";
+			do{
+				gets(reg.nombre);
+			}while(strlen(reg.nombre)==0);
+		}while(verifnombre(reg.nombre)==false);
+		do{
+			cout<<"Introduzca el numero de telefono : \n";
+			do{
+				gets(reg.telefono);
+			}while(strlen(reg.telefono)==0);
+		}while(verif_telefono(reg.telefono)==false);
+		do{
+			cout<<"Introduzca el email :\n";
+			do{
+				gets(reg.email);
+			}while(strlen(reg.email)==0);
+		}while(verifemail(reg.email)==false);
+		reg.estado='A';
+		fwrite(&reg,sizeof(reg),1,ptr);
+		fclose(ptr);
+		system("cls");
+		cout<<"El registro ha sido creado exitosamente \nPresione cualquier tecla para continuar ...";
+		}else{
+		cout<<"El Archivo no existe !\nPresione cualquier tecla para continuar ...";
+	}
+	getch();
+	system("cls");
+}
+void listado_vendedor(){
+  FILE *ptr;
+    int c=1;
+    regVendedor reg;
+    system("cls");
+    ptr=fopen("vendedores.dat","rb");
+    if(ptr != NULL){
+    fread(&reg,sizeof(reg),1,ptr);
+    cout<<"\n================================================================================";
+    cout<<"\n\t\tLISTADO VENDEDORES\n\n";
+    cout<<"--------------------------------------------------------------------------------\n";
+    cout<<"#\tID\tNOMBRE\t\tTELEFONO\tEMAIL\n\n";
+    while(feof(ptr)==false){
+      if(reg.estado=='A'){
+        cout<<c++<<"\t"<<reg.IdVendedor<<"\t"<<reg.nombre<<"\t\t"<<reg.telefono<<"\t"<<reg.email<<"\n";
+       }
+        fread(&reg,sizeof(reg),1,ptr);
+    }
+    
+    cout<<"================================================================================\n";
+
+	    fclose(ptr);
+	}else{cout<<"EL ARCHIVO NO EXISTE!";}
+	cout<<"\t\tPRESIONE CUALQUIER TECLA PARA CONTINUAR...";
+    getch();
+    system("cls");
+
+}
+regVendedor obtVendedor(int n){
+	FILE *ptr;
+    regVendedor reg;
+	bool bandera=false;
+    ptr=fopen("vendedores.dat","rb");
+    if(ptr!=NULL){
+        fread(&reg,sizeof(reg),1,ptr);
+        while((feof(ptr)==false)&&(bandera==false)){
+            fread(&reg,sizeof(reg),1,ptr);
+			if((reg.estado!='A')&&(reg.IdVendedor==n)){
+				bandera=true;
+			}
+        }
+        fclose(ptr);
+    }
+    return reg;
+}
+void borrar_registro_vendedor(){
+FILE *ptr;
+	int n,nroReg;
+	bool bandera=false;
+	char opc;
+	regVendedor reg;
+	system("cls");
+	do{
+		cout<<"Introduzca el ID del Vendedor que desea eliminar: \n";
+		while (!(cin >>n))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			//cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(verifvendedor(n)==false){
+			cout<<"No existe ningun vendedor con el ID ingresado!\n";
+		}else{
+			reg=obtVendedor(n);
+			cout<<"Este es el registro que desea eliminar: \n\n";
+			cout<<reg.IdVendedor<<"\t"<<reg.nombre<<"\t\t"<<reg.telefono<<"\t"<<reg.email<<"\n";
+			cin>>opc;
+			cout<<endl;
+			if((opc=='S')||(opc=='s')){
+				bandera=true;
+				reg.estado='E';
+				nroReg=obtNroRegV(n,"vendedores.dat");
+				ptr=fopen("vendedores.dat","r+b");
+				fseek(ptr,(nroReg-1)*sizeof(reg),SEEK_SET);
+				fwrite(&reg,sizeof(reg),1,ptr);
+				fclose(ptr);
+			}
+		}
+	}while(bandera==false);
+	system("cls");
+	cout<<"Registro eliminado exitosamente!\nPresione cualquier boton para continuar...\n";
+	getch();
+	system("cls");
+}
+void modificar_registro_vendedor(){
+	FILE *ptr;
+	int n,nroReg;
+	bool bandera=false;
+	char opc;
+	regVendedor reg;
+	system("cls");
+	do{
+		cout<<"Introduzca el ID del Vendedor que desea modificar: \n";
+		while (!(cin >>n))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			//cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(verifvendedor(n)==false){
+			cout<<"No existe ningun Vendedor con el ID ingresado!\n";
+		}else{
+			reg=obtVendedor(n);
+			cout<<"Este es el registro que desea eliminar: \n\n";
+			cout<<reg.IdVendedor<<"\t"<<reg.nombre<<"\t\t"<<reg.telefono<<"\t"<<reg.email<<"\n";
+			cin>>opc;
+			cout<<endl;
+			if((opc=='S')||(opc=='s')){
+				bandera=true;
+				ptr=fopen("vendedores.dat","rb");
+    if(ptr==NULL){
+        cout<<"EL ARCHIVO NO EXISTE!";
+    }else{
+       do{
+			cout<<"Introduzca el ID De Vendedor:\n\t <300-399>\n";
+			 while (!(cin >>reg.IdVendedor))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			if(verifvendedor(reg.IdVendedor)==true){
+				cout<<"Ya existe un Cliente con ese ID !\n";
+			}
+		}while((verifvendedor(reg.IdVendedor)==true)||(reg.IdVendedor<300)||(reg.IdVendedor>399));
+		do{
+			cout<<"Introduzca el nombre del Vendedor: \n";
+			do{
+				gets(reg.nombre);
+			}while(strlen(reg.nombre)==0);
+		}while(verifnombre(reg.nombre)==false);
+		do{
+			cout<<"Introduzca el numero de telefono : \n";
+			do{
+				gets(reg.telefono);
+			}while(strlen(reg.telefono)==0);
+		}while(verif_telefono(reg.telefono)==false);
+		do{
+			cout<<"Introduzca el email :\n";
+			do{
+				gets(reg.email);
+			}while(strlen(reg.email)==0);
+		}while(verifemail(reg.email)==false);
+		reg.estado='A';
+        }
+				nroReg=obtNroRegV(n,"vendedores.dat");
+				ptr=fopen("vendedores.dat","r+b");
+				fseek(ptr,(nroReg-1)*sizeof(reg),SEEK_SET);
+				fwrite(&reg,sizeof(reg),1,ptr);
+				fclose(ptr);
+			}
+		}
+	}while(bandera==false);
+	system("cls");
+	cout<<"Registro modificado exitosamente!\nPresione cualquier boton para continuar...\n";
+	getch();
+	system("cls");
+}
+void Menu_Vendedores(){
+	int opc=0;
+	do{
+	cout<<"================================================================================\n";
+	cout<<"\t  *****  M E N U     V E N D E D O R E S  *****\n\n";
+	cout<<"================================================================================\n";
+	cout<<"\t1.- Crear Archivo\n";
+	cout<<"\t2.- Adicionar registro al archivo\n";
+	cout<<"\t3.- Borrar un registro\n";
+	cout<<"\t4.- Modificar un registro\n";
+	cout<<"\t5.- Listado\n";
+	cout<<"\t0.- Atras\n";
+		while (!(cin >>opc))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero entero: " << endl;
+		}
+		switch(opc){
+			case 1: 
+				crear("vendedores.dat");
+				break;
+			case 2:
+				adicionar_vendedor();
+				break;
+			case 3: 
+				borrar_registro_vendedor();
+				break;
+			case 4: 
+				modificar_registro_vendedor();
+				break;
+			case 5: 
+				listado_vendedor();
+				break;
+			default :
+				system("cls");
+				if(opc!=0){
+				cout<<"ERROR OPCION INCORRECTA!\n\n";
+				}
+				break;
+
+		}
+	}while(opc!=0);}
+bool verifautomovil(int n){
+		bool k=false;
+	FILE *ptr;
+	regAutomovil reg;
+	ptr=fopen("automoviles.dat","rb");
+	while(feof(ptr)==false){
+		if((reg.IdAutomovil==n)&&(reg.estado=='A')){
+			k=true;
+		}
+		fread(&reg,sizeof(reg),1,ptr);
+	}
+		return k;
+}
+bool verifguion(char a[]){
+	bool k=false;
+	for(int i=0;i<strlen(a);i++){
+		if(a[i]=='-')
+			k=true;
+	}
+	return k;
+}
+void adicionar_automovil(){
+	FILE *ptr;
+	system("cls");
+	regAutomovil reg;
+	ptr=fopen("automoviles.dat","ab");
+	if(ptr!=NULL){
+		do{
+			cout<<"Introduzca el ID De automovil:\n\t <400-499>\n";
+			 while (!(cin >>reg.IdAutomovil))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			if(verifautomovil(reg.IdAutomovil)==true){ 
+				cout<<"Ya existe un automovil con ese ID !\n";
+			}
+		}while((verifautomovil(reg.IdAutomovil)==true)||(reg.IdAutomovil<400)||(reg.IdAutomovil>499));
+		do{
+			cout<<"Introduzca la placa del automovil: \n";
+			do{
+				gets(reg.placa);
+			}while(strlen(reg.placa)==0);
+		}while((verifletrasynumeros(reg.placa)==false)&&(verifguion(reg.placa)==false));
+		do{
+			cout<<"Introduzca el ID del cliente :\n";
+			 while (!(cin >>reg.IdCliente))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			 if(verifcliente(reg.IdCliente)==false){
+				cout<<"No existe un Cliente con ese ID\n";
+			 }
+		}while(verifcliente(reg.IdCliente)==false);
+		reg.estado='A';
+		fwrite(&reg,sizeof(reg),1,ptr);
+		fclose(ptr);
+		system("cls");
+		cout<<"El registro ha sido creado exitosamente \nPresione cualquier tecla para continuar ...";
+		}else{
+		cout<<"El Archivo no existe !\nPresione cualquier tecla para continuar ...";
+	}
+	getch();
+	system("cls");
+}
+regAutomovil obtAutomovil(int n){
+	FILE *ptr;
+    regAutomovil reg;
+	bool bandera=false;
+    ptr=fopen("automoviles.dat","rb");
+    if(ptr!=NULL){
+        fread(&reg,sizeof(reg),1,ptr);
+        while((feof(ptr)==false)&&(bandera==false)){
+			fread(&reg,sizeof(reg),1,ptr);		
+			if((reg.estado=='A')&&(reg.IdAutomovil==n)){
+				bandera=true;
+			}
+        }
+        fclose(ptr);
+    }
+    return reg;
+}
+void borrar_registro_automovil(){
+FILE *ptr;
+	int n,nroReg;
+	bool bandera=false;
+	char opc;
+	regAutomovil reg;
+	system("cls");
+	do{
+		cout<<"Introduzca el ID del Automovil que desea eliminar: \n";
+		while (!(cin >>n))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			//cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(verifautomovil(n)==false){
+			cout<<"No existe ningun Automovil con el ID ingresado!\n";
+		}else{
+			reg=obtAutomovil(n);
+			cout<<"Este es el registro que desea eliminar: \n\n";
+			cout<<reg.IdAutomovil<<"\t"<<reg.placa<<"\t\t"<<reg.IdCliente<<"\n";
+			cin>>opc;
+			cout<<endl;
+			if((opc=='S')||(opc=='s')){
+				bandera=true;
+				reg.estado='E';
+				nroReg=obtNroRegA(n,"automoviles.dat");
+				ptr=fopen("automoviles.dat","r+b");
+				fseek(ptr,(nroReg-1)*sizeof(reg),SEEK_SET);
+				fwrite(&reg,sizeof(reg),1,ptr);
+				fclose(ptr);
+			}
+		}
+	}while(bandera==false);
+	system("cls");
+	cout<<"Registro eliminado exitosamente!\nPresione cualquier boton para continuar...\n";
+	getch();
+	system("cls");
+}
+void modificar_registro_automovil(){
+	FILE *ptr;
+	int n,nroReg;
+	bool bandera=false;
+	char opc;
+	regAutomovil reg;
+	system("cls");
+	do{
+		cout<<"Introduzca el ID del Automovil que desea modificar: \n";
+		while (!(cin >>n))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			//cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(verifautomovil(n)==false){
+			cout<<"No existe ningun Automovil con el ID ingresado!\n";
+		}else{
+			reg=obtAutomovil(n);
+			cout<<"Este es el registro que desea eliminar: \n\n";
+			cout<<reg.IdAutomovil<<"\t"<<reg.placa<<"\t\t"<<reg.IdCliente<<"\n";
+			cin>>opc;
+			cout<<endl;
+			if((opc=='S')||(opc=='s')){
+				bandera=true;
+				ptr=fopen("automoviles.dat","rb");
+    if(ptr==NULL){
+        cout<<"EL ARCHIVO NO EXISTE!";
+    }else{
+      do{
+			cout<<"Introduzca el ID De automovil:\n\t <400-499>\n";
+			 while (!(cin >>reg.IdAutomovil))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			if(verifautomovil(reg.IdAutomovil)==true){ 
+				cout<<"Ya existe un automovil con ese ID !\n";
+			}
+		}while((verifautomovil(reg.IdAutomovil)==true)||(reg.IdAutomovil<400)||(reg.IdAutomovil>499));
+		do{
+			cout<<"Introduzca la placa del automovil: \n";
+			do{
+				gets(reg.placa);
+			}while(strlen(reg.placa)==0);
+		}while((verifletrasynumeros(reg.placa)==false)&&(verifguion(reg.placa)==false));
+		do{
+			cout<<"Introduzca el ID del cliente :\n";
+			 while (!(cin >>reg.IdCliente))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			 if(verifcliente(reg.IdCliente)==false){
+				cout<<"No existe un Cliente con ese ID\n";
+			 }
+		}while(verifcliente(reg.IdCliente)==false);
+		reg.estado='A';
+        }
+				nroReg=obtNroRegA(n,"automoviles.dat");
+				ptr=fopen("automoviles.dat","r+b");
+				fseek(ptr,(nroReg-1)*sizeof(reg),SEEK_SET);
+				fwrite(&reg,sizeof(reg),1,ptr);
+				fclose(ptr);
+			}
+		}
+	}while(bandera==false);
+	system("cls");
+	cout<<"Registro modificado exitosamente!\nPresione cualquier boton para continuar...\n";
+	getch();
+	system("cls");
+}
+void listado_automovil(){
+ FILE *ptr;
+    int c=1;
+    regAutomovil reg;
+    system("cls");
+    ptr=fopen("automoviles.dat","rb");
+    if(ptr != NULL){
+    fread(&reg,sizeof(reg),1,ptr);
+    cout<<"\n================================================================================";
+    cout<<"\n\t\tLISTADO AUTOMVOLIES\n\n";
+    cout<<"--------------------------------------------------------------------------------\n";
+    cout<<"#\tID\tPLACA\t\tID CLIENTE\n\n";
+    while(feof(ptr)==false){
+      if(reg.estado=='A'){
+        cout<<c++<<"\t"<<reg.IdAutomovil<<"\t"<<reg.placa<<"\t\t"<<reg.IdCliente<<"\n";
+       }
+        fread(&reg,sizeof(reg),1,ptr);
+    }
+    
+    cout<<"================================================================================\n";
+
+	    fclose(ptr);
+	}else{cout<<"EL ARCHIVO NO EXISTE!";}
+	cout<<"\t\tPRESIONE CUALQUIER TECLA PARA CONTINUAR...";
+    getch();
+    system("cls");
+
+}
+void Menu_Automoviles(){
+	int opc=0;
+	do{
+	cout<<"================================================================================\n";
+	cout<<"\t  *****  M E N U     A U T O M O V I L   *****\n\n";
+	cout<<"================================================================================\n";
+	cout<<"\t1.- Crear Archivo\n";
+	cout<<"\t2.- Adicionar registro al archivo\n";
+	cout<<"\t3.- Borrar un registro\n";
+	cout<<"\t4.- Modificar un registro\n";
+	cout<<"\t5.- Listado\n";
+	cout<<"\t0.- Atras\n";
+		while (!(cin >>opc))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero entero: " << endl;
+		}
+		switch(opc){
+			case 1: 
+				crear("automoviles.dat");
+				break;
+			case 2:
+				adicionar_automovil();
+				break;
+			case 3: 
+				borrar_registro_automovil();
+				break;
+			case 4: 
+				modificar_registro_automovil();
+				break;
+			case 5: 
+				listado_automovil();
+				break;
+			default :
+				system("cls");
+				if(opc!=0){
+				cout<<"ERROR OPCION INCORRECTA!\n\n";
+				}
+				break;
+
+		}
+	}while(opc!=0);
+}
+bool verifbomba(int n){
+		bool k=false;
+	FILE *ptr;
+	regBomba reg;
+	ptr=fopen("bombas.dat","rb");
+	while(feof(ptr)==false){
+		if((reg.IdBomba==n)&&(reg.estado=='A')){
+			k=true;
+		}
+		fread(&reg,sizeof(reg),1,ptr);
+	}
+		return k;
+}
+void adicionar_bomba(){
+	FILE *ptr;
+	system("cls");
+	regBomba reg;
+	ptr=fopen("bombas.dat","ab");
+	if(ptr!=NULL){
+		do{
+			cout<<"Introduzca el ID De la bomba:\n\t <500-599>\n";
+			 while (!(cin >>reg.IdBomba))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			if(verifbomba(reg.IdBomba)==true){ 
+				cout<<"Ya existe una bomba con ese ID !\n";
+			}
+		}while((verifbomba(reg.IdBomba)==true)||(reg.IdBomba<500)||(reg.IdBomba>599));
+		cout<<"Introduzca la descripcion de la bomba: \n";
+		do{
+			gets(reg.descripcion);
+		}while(strlen(reg.descripcion)==0);
+		do{
+			cout<<"Introduzca el ID del producto: \n";
+			 while (!(cin >>reg.IdProd))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			 if(verifprod(reg.IdProd)==false){
+				cout<<"No existe un Producto con la ID ingresada !\n";
+			 }
+		}while(verifprod(reg.IdProd)==false);
+		do{
+			cout<<"Introduzca el ID del vendedor : \n";
+			 while (!(cin >>reg.IdVendedor))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			 if(verifvendedor(reg.IdVendedor)==false){
+				cout<<"No existe un Vendedor con la ID ingresada !\n";
+			 }
+		}while(verifvendedor(reg.IdVendedor)==false);
+		reg.estado='A';
+		fwrite(&reg,sizeof(reg),1,ptr);
+		fclose(ptr);
+		system("cls");
+		cout<<"El registro ha sido creado exitosamente \nPresione cualquier tecla para continuar ...";
+		}else{
+		cout<<"El Archivo no existe !\nPresione cualquier tecla para continuar ...";
+	}
+	getch();
+	system("cls");
+}
+regBomba obtBomba(int n){
+	FILE *ptr;
+    regBomba reg;
+	bool bandera=false;
+    ptr=fopen("bombas.dat","rb");
+    if(ptr!=NULL){
+        fread(&reg,sizeof(reg),1,ptr);
+        while((feof(ptr)==false)&&(bandera==false)){
+			fread(&reg,sizeof(reg),1,ptr);		
+			if((reg.estado=='A')&&(reg.IdBomba==n)){
+				bandera=true;
+			}
+        }
+        fclose(ptr);
+    }
+    return reg;
+}
+void borrar_registro_bomba(){
+FILE *ptr;
+	int n,nroReg;
+	bool bandera=false;
+	char opc;
+	regBomba reg;
+	system("cls");
+	do{
+		cout<<"Introduzca el ID de la Bomba que desea eliminar: \n";
+		while (!(cin >>n))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			//cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(verifbomba(n)==false){
+			cout<<"No existe ninguna bomba con el ID ingresado!\n";
+		}else{
+			reg=obtBomba(n);
+			cout<<"Este es el registro que desea eliminar: \n\n";
+			cout<<reg.IdBomba<<"\t"<<reg.IdProd<<"\t"<<reg.IdVendedor<<"\t"<<reg.descripcion<<"\n";
+			cin>>opc;
+			cout<<endl;
+			if((opc=='S')||(opc=='s')){
+				bandera=true;
+				reg.estado='E';
+				nroReg=obtNroRegA(n,"bombas.dat");
+				ptr=fopen("bombas.dat","r+b");
+				fseek(ptr,(nroReg-1)*sizeof(reg),SEEK_SET);
+				fwrite(&reg,sizeof(reg),1,ptr);
+				fclose(ptr);
+			}
+		}
+	}while(bandera==false);
+	system("cls");
+	cout<<"Registro eliminado exitosamente!\nPresione cualquier boton para continuar...\n";
+	getch();
+	system("cls");
+}
+void listado_bomba(){
+ FILE *ptr;
+    int c=1;
+    regBomba reg;
+    system("cls");
+    ptr=fopen("bombas.dat","rb");
+    if(ptr != NULL){
+    fread(&reg,sizeof(reg),1,ptr);
+    cout<<"\n================================================================================";
+    cout<<"\n\t\tLISTADO BOMBAS\n\n";
+    cout<<"--------------------------------------------------------------------------------\n";
+    cout<<"#\tID\tID PRODUCTO\tID VENDEDOR\tDESCRIPCION\n\n";
+    while(feof(ptr)==false){
+      if(reg.estado=='A'){
+        cout<<c++<<"\t"<<reg.IdBomba<<"\t"<<reg.IdProd<<"\t\t"<<reg.IdVendedor<<"\t\t"<<reg.descripcion<<"\n";
+       }
+        fread(&reg,sizeof(reg),1,ptr);
+    }
+    
+    cout<<"================================================================================\n";
+
+	    fclose(ptr);
+	}else{cout<<"EL ARCHIVO NO EXISTE!";}
+	cout<<"\t\tPRESIONE CUALQUIER TECLA PARA CONTINUAR...";
+    getch();
+    system("cls");
+
+}
+void modificar_registro_bomba(){
+	FILE *ptr;
+	int n,nroReg;
+	bool bandera=false;
+	char opc;
+	regBomba reg;
+	system("cls");
+	do{
+		cout<<"Introduzca el ID de la Bomba que desea modificar: \n";
+		while (!(cin >>n))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			//cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(verifbomba(n)==false){
+			cout<<"No existe ninguna Bomba con el ID ingresado!\n";
+		}else{
+			reg=obtBomba(n);
+			cout<<"Este es el registro que desea eliminar: \n\n";
+			cout<<reg.IdBomba<<"\t"<<reg.IdProd<<"\t"<<reg.IdVendedor<<"\t"<<reg.descripcion<<"\n";
+			cin>>opc;
+			cout<<endl;
+			if((opc=='S')||(opc=='s')){
+				bandera=true;
+				ptr=fopen("bombas.dat","rb");
+    if(ptr==NULL){
+        cout<<"EL ARCHIVO NO EXISTE!";
+    }else{
+     do{
+			cout<<"Introduzca el ID De la bomba:\n\t <500-599>\n";
+			 while (!(cin >>reg.IdBomba))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			if(verifbomba(reg.IdBomba)==true){ 
+				cout<<"Ya existe una bomba con ese ID !\n";
+			}
+		}while((verifbomba(reg.IdBomba)==true)||(reg.IdBomba<500)||(reg.IdBomba>599));
+		cout<<"Introduzca la descripcion de la bomba: \n";
+		do{
+			gets(reg.descripcion);
+		}while(strlen(reg.descripcion)==0);
+		do{
+			cout<<"Introduzca el ID del producto: \n";
+			 while (!(cin >>reg.IdProd))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			 if(verifprod(reg.IdProd)==false){
+				cout<<"No existe un Producto con la ID ingresada !\n";
+			 }
+		}while(verifprod(reg.IdProd)==false);
+		do{
+			cout<<"Introduzca el ID del vendedor : \n";
+			 while (!(cin >>reg.IdVendedor))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			 if(verifvendedor(reg.IdVendedor)==false){
+				cout<<"No existe un Vendedor con la ID ingresada !\n";
+			 }
+		}while(verifvendedor(reg.IdVendedor)==false);
+		reg.estado='A';
+        }
+				nroReg=obtNroRegB(n,"bombas.dat");
+				ptr=fopen("bombas.dat","r+b");
+				fseek(ptr,(nroReg-1)*sizeof(reg),SEEK_SET);
+				fwrite(&reg,sizeof(reg),1,ptr);
+				fclose(ptr);
+			}
+		}
+	}while(bandera==false);
+	system("cls");
+	cout<<"Registro modificado exitosamente!\nPresione cualquier boton para continuar...\n";
+	getch();
+	system("cls");
+}
+void Menu_Bombas(){
+	int opc=0;
+	do{
+	cout<<"================================================================================\n";
+	cout<<"\t  *****  M E N U     B O M B A    *****\n\n";
+	cout<<"================================================================================\n";
+	cout<<"\t1.- Crear Archivo\n";
+	cout<<"\t2.- Adicionar registro al archivo\n";
+	cout<<"\t3.- Borrar un registro\n";
+	cout<<"\t4.- Modificar un registro\n";
+	cout<<"\t5.- Listado\n";
+	cout<<"\t0.- Atras\n";
+		while (!(cin >>opc))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero entero: " << endl;
+		}
+		switch(opc){
+			case 1: 
+				crear("bombas.dat");
+				break;
+			case 2:
+				adicionar_bomba();
+				break;
+			case 3: 
+				borrar_registro_bomba();
+				break;
+			case 4: 
+				modificar_registro_bomba();
+				break;
+			case 5: 
+				listado_bomba();
+				break;
+			default :
+				system("cls");
+				if(opc!=0){
+				cout<<"ERROR OPCION INCORRECTA!\n\n";
+				}
+				break;
+
+		}
+	}while(opc!=0);
+}
+bool verifcompra(int n){
+	bool k=false;
+	FILE *ptr;
+	regCompra reg;
+	ptr=fopen("compras.dat","rb");
+	while(feof(ptr)==false){
+		if((reg.IdCompra==n)&&(reg.estado=='A')){
+			k=true;
+		}
+		fread(&reg,sizeof(reg),1,ptr);
+	}
+		return k;
+}
+void sumarcantidadstock(int n,int id){
+    FILE *ptr;
+	int c=0;
+    regProducto reg;
+    ptr=fopen("productos.dat","r+b");
+    fread(&reg,sizeof(reg),1,ptr);
+    while(feof(ptr)==false){
+        if((reg.IdProd==id)&&(reg.estado=='A')){
+			reg.stock=reg.stock+n;
+			fseek(ptr,c*sizeof(reg),SEEK_SET);
+			fwrite(&reg,sizeof(reg),1,ptr);
+			fseek(ptr,0,SEEK_END);
+        }
+    fread(&reg,sizeof(reg),1,ptr);
+	c++;
+    }
+    fclose(ptr);
+
+
+}
+void adicionar_compra(){
+	FILE *ptr;
+	system("cls");
+	regCompra reg;
+	ptr=fopen("compras.dat","ab");
+	if(ptr!=NULL){
+		do{
+			cout<<"Introduzca el ID De la compra:\n\t <600-699>\n";
+			 while (!(cin >>reg.IdCompra))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			if(verifcompra(reg.IdCompra)==true){ 
+				cout<<"Ya existe una compra con ese ID !\n";
+			}
+		}while((verifcompra(reg.IdCompra)==true)||(reg.IdCompra<600)||(reg.IdCompra>699));
+		do{
+		cout<<"Introduzca la fecha: \t<DD/MM/AAAA>\n\t";
+        do{
+			gets(reg.fecha);
+		}while(strlen(reg.fecha)==0);
+		if(veriffecha(reg.fecha)==false){
+			cout<<"Por favor introduzca una fecha valida!\n";
+		}
+		}while(veriffecha(reg.fecha)==false);
+
+		do{
+			cout<<"Introduzca el ID del producto: \n";
+			 while (!(cin >>reg.IdProd))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			 if(verifprod(reg.IdProd)==false){
+				cout<<"No existe un Producto con la ID ingresada !\n";
+			 }
+		}while(verifprod(reg.IdProd)==false);
+		do{
+			cout<<"Introduzca la cantidad: \n";
+			while (!(cin >>reg.cantidad))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			if(reg.cantidad<=1){
+				cout<<"La cantidad no puede ser menor a 1\n";
+			}else{
+				sumarcantidadstock(reg.cantidad,reg.IdProd);
+			}
+
+		}while(reg.cantidad<=1);
+
+
+		reg.estado='A';
+		fwrite(&reg,sizeof(reg),1,ptr);
+		fclose(ptr);
+		system("cls");
+		cout<<"El registro ha sido creado exitosamente \nPresione cualquier tecla para continuar ...";
+		}else{
+		cout<<"El Archivo no existe !\nPresione cualquier tecla para continuar ...";
+	}
+	getch();
+	system("cls");
+}
+regCompra obtCompra(int n){
+		FILE *ptr;
+    regCompra reg;
+	bool bandera=false;
+    ptr=fopen("compras.dat","rb");
+    if(ptr!=NULL){
+        fread(&reg,sizeof(reg),1,ptr);
+        while((feof(ptr)==false)&&(bandera==false)){
+			fread(&reg,sizeof(reg),1,ptr);		
+			if((reg.estado=='A')&&(reg.IdCompra==n)){
+				bandera=true;
+			}
+        }
+        fclose(ptr);
+    }
+    return reg;
+}
+void borrar_registro_compra(){
+FILE *ptr;
+	int n,nroReg;
+	bool bandera=false;
+	char opc;
+	regCompra reg;
+	system("cls");
+	do{
+		cout<<"Introduzca el ID de la compra que desea eliminar: \n";
+		while (!(cin >>n))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			//cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(verifcompra(n)==false){
+			cout<<"No existe ninguna compra con el ID ingresado!\n";
+		}else{
+			reg=obtCompra(n);
+			cout<<"Este es el registro que desea eliminar: \n\n";
+			cout<<reg.IdCompra<<"\t"<<reg.fecha<<"\t"<<reg.IdProd<<"\t"<<reg.cantidad<<"\t"<<"\n";
+			cin>>opc;
+			cout<<endl;
+			if((opc=='S')||(opc=='s')){
+				bandera=true;
+				reg.estado='E';
+				nroReg=obtNroRegA(n,"compras.dat");
+				ptr=fopen("compras.dat","r+b");
+				restar_cant_stock(reg.cantidad,reg.IdProd);
+				fseek(ptr,(nroReg-1)*sizeof(reg),SEEK_SET);
+				fwrite(&reg,sizeof(reg),1,ptr);
+				fclose(ptr);
+			}
+		}
+	}while(bandera==false);
+	system("cls");
+	cout<<"Registro eliminado exitosamente!\nPresione cualquier boton para continuar...\n";
+	getch();
+	system("cls");
+}
+void listado_compra(){
+ FILE *ptr;
+    int c=1;
+    regCompra reg;
+    system("cls");
+    ptr=fopen("compras.dat","rb");
+    if(ptr != NULL){
+    fread(&reg,sizeof(reg),1,ptr);
+    cout<<"\n================================================================================";
+    cout<<"\n\t\tLISTADO COMPRAS\n\n";
+    cout<<"--------------------------------------------------------------------------------\n";
+    cout<<"#\tID COMPRA\tFECHA\t\tID PROD\t\tCANTIDAD\n\n";
+    while(feof(ptr)==false){
+      if(reg.estado=='A'){
+        cout<<c++<<"\t"<<reg.IdCompra<<"\t\t"<<reg.fecha<<"\t"<<reg.IdProd<<"\t\t"<<reg.cantidad<<"\n";
+       }
+        fread(&reg,sizeof(reg),1,ptr);
+    }
+    
+    cout<<"================================================================================\n";
+
+	    fclose(ptr);
+	}else{cout<<"EL ARCHIVO NO EXISTE!";}
+	cout<<"\t\tPRESIONE CUALQUIER TECLA PARA CONTINUAR...";
+    getch();
+    system("cls");
+
+}
+void modificar_registro_compra(){
+FILE *ptr;
+	int n,nroReg,cant;
+	bool bandera=false;
+	char opc;
+	regCompra reg;
+	system("cls");
+	do{
+		cout<<"Introduzca el ID de la Compra que desea modificar: \n";
+		while (!(cin >>n))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			//cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(verifcompra(n)==false){
+			cout<<"No existe ninguna compra con el ID ingresado!\n";
+		}else{
+			reg=obtCompra(n);
+			cout<<"Este es el registro que desea eliminar: \n\n";
+			cout<<reg.IdCompra<<"\t"<<reg.fecha<<"\t"<<reg.IdProd<<"\t"<<reg.cantidad<<"\t"<<"\n";
+			cin>>opc;
+			cant=reg.cantidad;
+			cout<<endl;
+			if((opc=='S')||(opc=='s')){
+				bandera=true;
+				ptr=fopen("compras.dat","rb");
+    if(ptr==NULL){
+        cout<<"EL ARCHIVO NO EXISTE!";
+    }else{
+     do{
+			cout<<"Introduzca el ID De la compra:\n\t <600-699>\n";
+			 while (!(cin >>reg.IdCompra))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			if(verifcompra(reg.IdCompra)==true){ 
+				cout<<"Ya existe una compra con ese ID !\n";
+			}
+		}while((verifcompra(reg.IdCompra)==true)||(reg.IdCompra<600)||(reg.IdCompra>699));
+		do{
+		cout<<"Introduzca la fecha: \t<DD/MM/AAAA>\n\t";
+        do{
+			gets(reg.fecha);
+		}while(strlen(reg.fecha)==0);
+		if(veriffecha(reg.fecha)==false){
+			cout<<"Por favor introduzca una fecha valida!\n";
+		}
+		}while(veriffecha(reg.fecha)==false);
+
+		do{
+			cout<<"Introduzca el ID del producto: \n";
+			 while (!(cin >>reg.IdProd))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			 if(verifprod(reg.IdProd)==false){
+				cout<<"No existe un Producto con la ID ingresada !\n";
+			 }
+		}while(verifprod(reg.IdProd)==false);
+		do{
+			cout<<"Introduzca la cantidad: \n";
+			while (!(cin >>reg.cantidad))
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+				cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			if(reg.cantidad<=1){
+				cout<<"La cantidad no puede ser menor a 1\n";
+			}else{
+				if(cant<reg.cantidad){
+				sumarcantidadstock(reg.cantidad-cant,reg.IdProd);
+				}else{
+					if(cant>reg.cantidad){
+						restar_cant_stock(cant-reg.cantidad,reg.IdProd);
+					}
+				}
+			}
+		}while(reg.cantidad<=1);
+
+
+		reg.estado='A';
+        }
+				nroReg=obtNroRegCO(n,"compras.dat");
+				ptr=fopen("compras.dat","r+b");
+				fseek(ptr,(nroReg-1)*sizeof(reg),SEEK_SET);
+				fwrite(&reg,sizeof(reg),1,ptr);
+				fclose(ptr);
+			}
+		}
+	}while(bandera==false);
+	system("cls");
+	cout<<"Registro modificado exitosamente!\nPresione cualquier boton para continuar...\n";
+	getch();
+	system("cls");
+}
+void Menu_Compras(){
+	int opc=0;
+	do{
+	cout<<"================================================================================\n";
+	cout<<"\t  *****  M E N U     C O M P R A S    *****\n\n";
+	cout<<"================================================================================\n";
+	cout<<"\t1.- Crear Archivo\n";
+	cout<<"\t2.- Adicionar registro al archivo\n";
+	cout<<"\t3.- Borrar un registro\n";
+	cout<<"\t4.- Modificar un registro\n";
+	cout<<"\t5.- Listado\n";
+	cout<<"\t0.- Atras\n";
+		while (!(cin >>opc))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero entero: " << endl;
+		}
+		switch(opc){
+			case 1: 
+				crear("compras.dat");
+				break;
+			case 2:
+				adicionar_compra();
+				break;
+			case 3: 
+				borrar_registro_compra();
+				break;
+			case 4: 
+				modificar_registro_compra();
+				break;
+			case 5: 
+				listado_compra();
+				break;
+			default :
+				system("cls");
+				if(opc!=0){
+				cout<<"ERROR OPCION INCORRECTA!\n\n";
+				}
+				break;
+
+		}
+	}while(opc!=0);
+}
+void adicionar_venta(){
+    FILE *ptr;
+	bool bandera=false;
+    regVenta reg;
+	regBomba regB;
+	regProducto regP;
+    system("cls");
+    ptr=fopen("ventas.dat","ab");
+    if(ptr!=NULL){
+		do{
+        cout<<"Introduzca el id de la venta: \n \t<700-799>\n";
+        while (!(cin >>reg.IdVenta))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero entero: " << endl;
+		}
+		if((verifventa(reg.IdVenta)==true)){
+			cout<<"El Id de la venta ya existe!\n";
+		}else{
+			if((reg.IdVenta<700)||(reg.IdVenta>799)){
+				cout<<"El Id solo puede estar en el rango de  :\n\t<700/799>\n";
+			}
+		}
+		}while((verifventa(reg.IdVenta)==true)||(reg.IdVenta<700)||(reg.IdVenta>799));
+        
+		
+		do{
+		cout<<"Introduzca la fecha: \t<DD/MM/AAAA>\n\t";
+        do{
+			gets(reg.fecha);
+		}while(strlen(reg.fecha)==0);
+		if(veriffecha(reg.fecha)==false){
+			cout<<"Por favor introduzca una fecha valida!\n";
+		}
+		}while(veriffecha(reg.fecha)==false);
+		
+		do{
+			cout<<"Introduzca el id del automovil: ";
+		  while (!(cin >>reg.IdAuto))
+			{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			if((verifautomovil(reg.IdAuto))==false){
+				cout<<"No extiste ningun automovil con el Id ingresado!\n";
+			}
+		    }while((verifautomovil(reg.IdAuto))==false);
+		do{
+		cout<<"Introduzca el id de la bomba: ";
+        while (!(cin >>reg.IdBomba))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero entero: " << endl;
+		}
+		if((verifbomba(reg.IdBomba))==false){
+			cout<<"No extiste ninguna bomba con el Id ingresado!\n";
+		}
+        }while((verifbomba(reg.IdBomba))==false);
+		regB=obtBomba(reg.IdBomba);
+		regP=obtProducto(regB.IdProd);
+		reg.preciounit=regP.precio;
+		do{
+		cout<<"Introduzca la cantidad: \n";
+        while (!(cin >>reg.cantidad))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero entero: " << endl;
+		}
+		if(reg.cantidad<1){
+			cout<<"La cantidad comprada no puede ser menor a 1!\n";
+		}
+		if(reg.cantidad<regP.stock){
+			restar_cant_stock(reg.cantidad,regP.IdProd);
+			bandera=true;
+		}else{
+			cout<<"la cantidad ingresada es mayor al stock disponible!\n";
+		}
+
+		}while((reg.cantidad<1)&&(bandera==false));
+		
+        reg.estado='A';
+        fwrite(&reg,sizeof(reg),1,ptr);
+        fclose(ptr);
+		cout<<"registro agregado correctamente !\npresione cualquier tecla para continuar : ";
+    }else{cout<<"EL ARCHIVO NO EXISTE!!\n";}
+
+    getch();
+    system("cls");
+}
+void listado_venta(){
+        FILE *ptr;
+    int c=1;
+    regVenta reg;
+    system("cls");
+    ptr=fopen("ventas.dat","rb");
+    if(ptr != NULL){
+    fread(&reg,sizeof(reg),1,ptr);
+    cout<<"\n=================================================";
+    cout<<"\n\t\tLISTADO VENTAS\n\n";
+    cout<<"----------------------------------------------------\n";
+    cout<<"#  ID\tFECHA\tCANTIDAD\tPRECIO UNIT\tID Automovil\tID Bomba\n\n";
+    while(feof(ptr)==false){
+      if(reg.estado=='A'){
+        cout<<c++<<".-"<<reg.IdVenta<<"\t"<<reg.fecha<<"\t"<<reg.cantidad<<"\t\t"<<reg.preciounit<<"\t"<<reg.IdAuto<<"\t\t"<<reg.IdBomba<<"\n";
+       }
+        fread(&reg,sizeof(reg),1,ptr);
+    }
+   
+    cout<<"====================================================\n";
+    fclose(ptr);
+	}else{cout<<"EL ARCHIVO NO EXISTE!!\n";}
+	cout<<"\t\tPRESIONE CUALQUIER TECLA PARA CONTINUAR...";
+    getch();
+    system("cls");
+
+}
+regVenta obtVenta(int n){
+		FILE *ptr;
+    regVenta reg;
+	bool bandera=false;
+    ptr=fopen("ventas.dat","rb");
+    if(ptr!=NULL){
+        fread(&reg,sizeof(reg),1,ptr);
+        while((feof(ptr)==false)&&(bandera==false)){
+			fread(&reg,sizeof(reg),1,ptr);		
+			if((reg.estado=='A')&&(reg.IdVenta==n)){
+				bandera=true;
+			}
+        }
+        fclose(ptr);
+    }
+    return reg;
+}
+void modificar_registro_venta(){
+	FILE *ptr;
+	int n,nroReg,cant;
+	bool bandera=false;
+	char opc;
+	regVenta reg;
+	regBomba regB;
+	regProducto regP;
+	system("cls");
+	do{
+		cout<<"Introduzca el ID de la Venta que desea modificar: \n";
+		while (!(cin >>n))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			//cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(verifventa(n)==false){
+			cout<<"No existe ninguna venta con el ID ingresado!\n";
+		}else{
+			reg=obtVenta(n);
+			cout<<"Este es el registro que desea eliminar: \n\n";
+			cout<<reg.IdVenta<<"\t"<<reg.fecha<<"\t"<<reg.cantidad<<"\t"<<reg.preciounit<<"\t"<<reg.IdAuto<<"\t"<<reg.IdBomba<<"\n";
+			cin>>opc;
+			cant=reg.cantidad;
+			cout<<endl;
+			if((opc=='S')||(opc=='s')){
+				bandera=true;
+				ptr=fopen("ventas.dat","rb");
+    if(ptr==NULL){
+        cout<<"EL ARCHIVO NO EXISTE!";
+    }else{
+     do{
+        cout<<"Introduzca el id de la venta: \n \t<700-799>\n";
+        while (!(cin >>reg.IdVenta))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero entero: " << endl;
+		}
+		if((verifventa(reg.IdVenta)==true)){
+			cout<<"El Id de la venta ya existe!\n";
+		}else{
+			if((reg.IdVenta<700)||(reg.IdVenta>799)){
+				cout<<"El Id solo puede estar en el rango de  :\n\t<700/799>\n";
+			}
+		}
+		}while((verifventa(reg.IdVenta)==true)||(reg.IdVenta<700)||(reg.IdVenta>799));
+        
+		
+		do{
+		cout<<"Introduzca la fecha: \t<DD/MM/AAAA>\n\t";
+        do{
+			gets(reg.fecha);
+		}while(strlen(reg.fecha)==0);
+		if(veriffecha(reg.fecha)==false){
+			cout<<"Por favor introduzca una fecha valida!\n";
+		}
+		}while(veriffecha(reg.fecha)==false);
+		
+		do{
+			cout<<"Introduzca el id del automovil: ";
+		  while (!(cin >>reg.IdAuto))
+			{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			cout << "Por favor introduzca un numero entero: " << endl;
+			}
+			if((verifautomovil(reg.IdAuto))==false){
+				cout<<"No extiste ningun automovil con el Id ingresado!\n";
+			}
+		    }while((verifautomovil(reg.IdAuto))==false);
+		do{
+		cout<<"Introduzca el id de la bomba: ";
+        while (!(cin >>reg.IdBomba))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero entero: " << endl;
+		}
+		if((verifbomba(reg.IdBomba))==false){
+			cout<<"No extiste ninguna bomba con el Id ingresado!\n";
+		}
+        }while((verifbomba(reg.IdBomba))==false);
+		regB=obtBomba(reg.IdBomba);
+		regP=obtProducto(regB.IdProd);
+		reg.preciounit=regP.precio;
+		do{
+		cout<<"Introduzca la cantidad";
+        while (!(cin >>reg.cantidad))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero entero: " << endl;
+		}
+		if(reg.cantidad<1){
+			cout<<"La cantidad comprada no puede ser menor a 1!\n";
+		}
+		if(reg.cantidad<cant){
+			restar_cant_stock(cant-reg.cantidad,regP.IdProd);
+			bandera=true;
+		}else{
+			if(reg.cantidad>cant){
+				sumarcantidadstock(reg.cantidad-cant,regP.IdProd);
+				bandera=true;
+			}else{bandera=true;}
+		}
+
+		}while((reg.cantidad<1)&&(bandera==false));
+		
+        reg.estado='A';
+        }
+				nroReg=obtNroRegCO(n,"compras.dat");
+				ptr=fopen("compras.dat","r+b");
+				fseek(ptr,(nroReg-1)*sizeof(reg),SEEK_SET);
+				fwrite(&reg,sizeof(reg),1,ptr);
+				fclose(ptr);
+			}
+		}
+	}while(bandera==false);
+	system("cls");
+	cout<<"Registro modificado exitosamente!\nPresione cualquier boton para continuar...\n";
+	getch();
+	system("cls");
+}
+void borrar_registro_venta(){
+FILE *ptr;
+	int n,nroReg;
+	bool bandera=false;
+	char opc;
+	regBomba regB;
+	regProducto regP;
+	regVenta reg;
+	system("cls");
+	do{
+		cout<<"Introduzca el ID de la venta que desea eliminar: \n";
+		while (!(cin >>n))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			//cout << "Por favor introduzca un numero : " << endl;
+		}
+		if(verifventa(n)==false){
+			cout<<"No existe ninguna compra con el ID ingresado!\n";
+		}else{
+			reg=obtVenta(n);
+			cout<<"Este es el registro que desea eliminar: \n\n";
+			cout<<reg.IdVenta<<"\t"<<reg.fecha<<"\t"<<reg.cantidad<<"\t"<<reg.preciounit<<"\t"<<reg.IdAuto<<"\t"<<reg.IdBomba<<"\n";
+			cin>>opc;
+			cout<<endl;
+			if((opc=='S')||(opc=='s')){
+				bandera=true;
+				regB=obtBomba(reg.IdBomba);
+				regP=obtProducto(regB.IdProd);
+				reg.estado='E';
+				sumarcantidadstock(reg.cantidad,regP.IdProd);
+				nroReg=obtNroRegA(n,"ventas.dat");
+				ptr=fopen("ventas.dat","r+b");
+				fseek(ptr,(nroReg-1)*sizeof(reg),SEEK_SET);
+				fwrite(&reg,sizeof(reg),1,ptr);
+				fclose(ptr);
+			}
+		}
+	}while(bandera==false);
+	system("cls");
+	cout<<"Registro eliminado exitosamente!\nPresione cualquier boton para continuar...\n";
+	getch();
+	system("cls");
+}
+void Menu_Ventas(){
+int opc=0;
+	do{
+	cout<<"================================================================================\n";
+	cout<<"\t  *****  M E N U     V E N T A   *****\n\n";
+	cout<<"================================================================================\n";
+	cout<<"\t1.- Crear Archivo\n";
+	cout<<"\t2.- Adicionar registro al archivo\n";
+	cout<<"\t3.- Borrar un registro\n";
+	cout<<"\t4.- Modificar un registro\n";
+	cout<<"\t5.- Listado\n";
+	cout<<"\t0.- Atras\n";
+		while (!(cin >>opc))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero entero: " << endl;
+		}
+		switch(opc){
+			case 1: 
+				crear("ventas.dat");
+				break;
+			case 2:
+				adicionar_venta();
+				break;
+			case 3: 
+				borrar_registro_venta();
+				break;
+			case 4: 
+				modificar_registro_venta();
+				break;
+			case 5: 
+				listado_venta();
+				break;
+			default :
+				system("cls");
+				if(opc!=0){
+				cout<<"ERROR OPCION INCORRECTA!\n\n";
+				}
+				break;
+
+		}
+	}while(opc!=0);
+}
+bool verifexiste(int vec[],int n,int elem){
+	bool k=false;
+	for(int i=0;i<n;i++){
+		if(vec[i]==elem);
+		k=true;
+	}
+	return k;
+}
+int posicion(int vec[],int n,int elem){
+	for(int i=0;i<n;i++){
+		if (vec[i]==elem){
+			return i;
+		}
+	}
+}
+/*void reporte_cliente_mayor(){
+	FILE *ptr;
+	regVenta reg;
+	regAutomovil regA;
+	regCliente regC;
+	int vecA[50],nA=0, vecB[50],c;
+	ptr=fopen("ventas.dat","rb");
+	if(ptr!=NULL){
+		fread(&reg,sizeof(reg),1,ptr);
+		while(feof(ptr)==false){
+			regA=obtAutomovil(reg.IdAuto);
+			regC=obtCliente(regA.IdCliente);
+			if(verifexiste(vecA,nA,regC.IdCliente)==false){
+				vecB[nA]=reg.preciounit*reg.cantidad;
+				vecA[nA++]=regC.IdCliente;
+			}else{
+				vecB[posicion(vecA,nA,regC.IdCliente)]=vecB[posicion(vecA,nA,regC.IdCliente)]+reg.preciounit*reg.cantidad;
+			}
+			fread(&reg,sizeof(reg),1,ptr);
+		}
+		int may=vecB[0];
+		for(int i=0;i<nA;i++){
+			if(vecB[i]>may){
+				may=vecB[i];
+				c=i;
+			}
+		}
+	regC=obtCliente(vecA[c]);
+	cout<<"El cliente que mas ingresos genero fue : "<<regC.nombre<<"  con un total de : "<<may<<endl;
+	
+	}
+getch();
+system("cls");
+}*/
+bool verif_fecha_despues(char f1[],char f2[]){
+	bool k=true,bandera_dia=true,bandera_mes=true;
+	int aux[5],c=0,dia[5],mes[5],anho[5],ndia,nmes,nanho,DD=0,MM=0,AAAA=0,DD2=0,MM2=0,AAAA2=0;
+	for(int i=0;i<strlen(f1);i++){
+			if(f1[i]!='/'){
+				aux[c++]=f1[i]-48;
+			}else{
+				if(bandera_dia==true){
+					for(int j=0;j<c;j++){
+						dia[j]=aux[j];
+						ndia=c;
+					}
+					c=0;
+					bandera_dia=false;
+				}else{
+					if(bandera_mes==true){
+						for(int j=0;j<c;j++){
+							mes[j]=aux[j];
+							nmes=c;
+						}
+						c=0;
+						bandera_mes=false;	
+					}
+				}
+			}
+		}
+	for(int j=0;j<c;j++){
+			anho[j]=aux[j];
+			nanho=c;
+		}
+	for(int i=0;i<ndia;i++){
+			DD=DD*10+dia[i];
+		}
+		for(int i=0;i<nmes;i++){
+			MM=MM*10+mes[i];
+		}
+		for(int i=0;i<nanho;i++){
+			AAAA=AAAA*10+anho[i];
+		}
+
+
+		//***************************************************************************************494*
+		c=0;
+		bandera_dia=true; bandera_mes=true;
+		for(int i=0;i<strlen(f2);i++){
+			if(f2[i]!='/'){
+				aux[c++]=f2[i]-48;
+			}else{
+				if(bandera_dia==true){
+					for(int j=0;j<c;j++){
+						dia[j]=aux[j];
+						ndia=c;
+					}
+					c=0;
+					bandera_dia=false;
+				}else{
+					if(bandera_mes==true){
+						for(int j=0;j<c;j++){
+							mes[j]=aux[j];
+							nmes=c;
+						}
+						c=0;
+						bandera_mes=false;	
+					}
+				}
+			}
+		}
+		for(int j=0;j<c;j++){
+			anho[j]=aux[j];
+			nanho=c;
+		}
+	for(int i=0;i<ndia;i++){
+			DD2=DD2*10+dia[i];
+		}
+		for(int i=0;i<nmes;i++){
+			MM2=MM2*10+mes[i];
+		}
+		for(int i=0;i<nanho;i++){
+			AAAA2=AAAA2*10+anho[i];
+		}
+	//	cout<<AAAA2<<"\t"<<AAAA;
+		if(AAAA2<AAAA){
+			k=false;
+		}else{
+			if(AAAA2==AAAA){
+				if(MM>MM2){
+					k=false;
+				}else{
+					if(MM2==MM){
+						if(DD2<DD){
+							k=false;
+						}
+					}
+				}
+			}
+		}
+
+
+	return k;
+}
+void reporte_cliente_mayor(){
+	char fecha1[12],fecha2[12];
+	do{
+	cout<<"Introduzca la fecha inicial: ";
+	do{
+	gets(fecha1);
+	}while(strlen(fecha1)==0);
+	if(veriffecha(fecha1)==false) cout<<"Fecha incorrecta!\n";
+	}while(veriffecha(fecha1)==false);
+	do{
+	cout<<"Introduzca la fecha final: ";
+	do{
+	gets(fecha2);
+	}while(strlen(fecha2)==0);
+	if(veriffecha(fecha2)==false) cout<<"Fecha incorrecta!\n";
+	if(verif_fecha_despues(fecha1,fecha2)==false) cout<<"La fecha final tiene que ser luego de la fecha inicial!\n";
+	}while((veriffecha(fecha2)==false)&&(verif_fecha_despues(fecha1,fecha2)==false));
+	
+	FILE *ptr;
+	regVenta reg;
+	regAutomovil regA;
+	regCliente regC;
+	int vecA[50],nA=0, vecB[50],c;
+	ptr=fopen("ventas.dat","rb");
+	if(ptr!=NULL){
+		fread(&reg,sizeof(reg),1,ptr);
+		while(feof(ptr)==false){
+			regA=obtAutomovil(reg.IdAuto);
+			regC=obtCliente(regA.IdCliente);
+			if((verif_fecha_despues(reg.fecha,fecha1)==false)&&(verif_fecha_despues(reg.fecha,fecha2)==true)){
+			if(verifexiste(vecA,nA,regC.IdCliente)==false){
+				vecB[nA]=reg.preciounit*reg.cantidad;
+				vecA[nA++]=regC.IdCliente;
+			}else{
+				vecB[posicion(vecA,nA,regC.IdCliente)]=vecB[posicion(vecA,nA,regC.IdCliente)]+reg.preciounit*reg.cantidad;
+			}
+			}
+			fread(&reg,sizeof(reg),1,ptr);
+		}
+		int may=vecB[0];
+		for(int i=0;i<nA;i++){
+			if(vecB[i]>may){
+				may=vecB[i];
+				c=i;
+			}
+		}
+	regC=obtCliente(vecA[c]);
+	system("cls");
+	cout<<"\t\t*****REPORTE MAYOR CLIENTE*****\n\n\n==================================================================\n\n\n";
+	cout<<"El cliente que mas ingresos genero fue : \n"<<regC.nombre<<" \n con un total de : \n"<<may<<" ==>  ";
+	liter(may);
+	cout<<"\n\n-------------------------------------------------------------------\n\n";
+	
+	}
+	getch();
+	system("cls");
+}
+void reporte_ventas(){
+	char fecha1[12],fecha2[12];
+	do{
+	cout<<"Introduzca la fecha inicial: ";
+	do{
+	gets(fecha1);
+	}while(strlen(fecha1)==0);
+	if(veriffecha(fecha1)==false) cout<<"Fecha incorrecta!\n";
+	}while(veriffecha(fecha1)==false);
+	do{
+	cout<<"Introduzca la fecha final: ";
+	do{
+	gets(fecha2);
+	}while(strlen(fecha2)==0);
+	if(veriffecha(fecha2)==false) cout<<"Fecha incorrecta!\n";
+	if(verif_fecha_despues(fecha1,fecha2)==false) cout<<"La fecha final tiene que ser luego de la fecha inicial!\n";
+	}while((veriffecha(fecha2)==false)&&(verif_fecha_despues(fecha1,fecha2)==false));
+	    FILE *ptr;
+    int c=1,total=0;
+    regVenta reg;
+    system("cls");
+    ptr=fopen("ventas.dat","rb");
+    if(ptr != NULL){
+    fread(&reg,sizeof(reg),1,ptr);
+    cout<<"\n=================================================";
+    cout<<"\n\t\tREPORTE VENTAS\n\n";
+    cout<<"----------------------------------------------------\n";
+    cout<<"#  ID\tFECHA\tCANTIDAD\tPRECIO UNIT\tID Automovil\tID Bomba\n\n";
+    while(feof(ptr)==false){
+      if((reg.estado=='A')&&(verif_fecha_despues(reg.fecha,fecha1)==false)&&(verif_fecha_despues(reg.fecha,fecha2)==true)){
+        cout<<c++<<".-"<<reg.IdVenta<<"\t"<<reg.fecha<<"\t"<<reg.cantidad<<"\t\t"<<reg.preciounit<<"\t"<<reg.IdAuto<<"\t\t"<<reg.IdBomba<<"\n";
+		total=total +reg.preciounit*reg.cantidad;
+       }
+        fread(&reg,sizeof(reg),1,ptr);
+    }
+   cout<<"El total de Ventas en este periodo fue:\n \t"<<total<<"==>";
+   liter(total);
+   cout<<"\n";
+    cout<<"====================================================\n";
+
+    fclose(ptr);
+	}else{cout<<"EL ARCHIVO NO EXISTE!!\n";}
+	cout<<"\t\tPRESIONE CUALQUIER TECLA PARA CONTINUAR...";
+    getch();
+    system("cls");
+
+}
+void reporte_compras(){
+	char fecha1[12],fecha2[12];
+	do{
+	cout<<"Introduzca la fecha inicial: ";
+	do{
+	gets(fecha1);
+	}while(strlen(fecha1)==0);
+	if(veriffecha(fecha1)==false) cout<<"Fecha incorrecta!\n";
+	}while(veriffecha(fecha1)==false);
+	do{
+	cout<<"Introduzca la fecha final: ";
+	do{
+	gets(fecha2);
+	}while(strlen(fecha2)==0);
+	if(veriffecha(fecha2)==false) cout<<"Fecha incorrecta!\n";
+	if(verif_fecha_despues(fecha1,fecha2)==false) cout<<"La fecha final tiene que ser luego de la fecha inicial!\n";
+	}while((veriffecha(fecha2)==false)&&(verif_fecha_despues(fecha1,fecha2)==false));
+	 FILE *ptr;
+    int c=1,total=0;
+    regCompra reg;
+	regProducto regP;
+    system("cls");
+    ptr=fopen("compras.dat","rb");
+    if(ptr != NULL){
+    fread(&reg,sizeof(reg),1,ptr);
+    cout<<"\n================================================================================";
+    cout<<"\n\t\tLISTADO COMPRAS\n\n";
+    cout<<"--------------------------------------------------------------------------------\n";
+    cout<<"#\tID COMPRA\tFECHA\t\tID PROD\t\tCANTIDAD\n\n";
+    while(feof(ptr)==false){
+      if(reg.estado=='A'){
+		  regP=obtProducto(reg.IdProd);
+		  if((verif_fecha_despues(reg.fecha,fecha1)==false)&&(verif_fecha_despues(reg.fecha,fecha2)==true)){
+        cout<<c++<<"\t"<<reg.IdCompra<<"\t\t"<<reg.fecha<<"\t"<<reg.IdProd<<"\t\t"<<reg.cantidad<<"\n";
+		total=total+reg.cantidad*regP.precio;
+		  }
+       }
+        fread(&reg,sizeof(reg),1,ptr);
+    }
+     cout<<"El total de Compras en este periodo fue: \n\t"<<total<<" ==>  "; 
+	 liter(total);
+    cout<<"\n================================================================================\n";
+
+	    fclose(ptr);
+	}else{cout<<"EL ARCHIVO NO EXISTE!";}
+	cout<<"\t\tPRESIONE CUALQUIER TECLA PARA CONTINUAR...";
+    getch();
+    system("cls");
+
+}
+void Menu_Reportes(){
+	int opc=0;
+	do{
+	cout<<"================================================================================\n";
+	cout<<"\t  *****  M E N U     R E P O R T E S  *****\n\n";
+	cout<<"================================================================================\n";
+	cout<<"\t1.- Cliente con mayor compras en un periodo de tiempo\n";
+	cout<<"\t2.- Reporte de ventas\n";
+	cout<<"\t3.- Reporte de Compras\n";
+	cout<<"\t0.- Atras\n";
+		while (!(cin >>opc))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero entero: " << endl;
+		}
+		switch(opc){
+			case 1: 
+				system("cls");
+				reporte_cliente_mayor();
+				break;
+			case 2: 
+				system("cls");
+				reporte_ventas();
+				break;
+			case 3: 
+				system("cls");
+				reporte_compras();
+				break;
+			default :
+				system("cls");
+				if(opc!=0){
+				cout<<"ERROR OPCION INCORRECTA!\n\n";
+				}
+				break;
+
+		}
+	}while(opc!=0);
+}
+void main(){
+	int opc=0;
+	do{
+	cout<<"================================================================================\n";
+	cout<<"\t  *****  M E N U     A R C H I V O S  *****\n\n";
+	cout<<"================================================================================\n";
+	cout<<"\t1.- Menu Productos \n";
+	cout<<"\t2.- Menu Clientes\n";
+	cout<<"\t3.- Menu Vendedores\n";
+	cout<<"\t4.- Menu Automoviles\n";
+	cout<<"\t5.- Menu Bombas\n";
+	cout<<"\t6.- Menu Compras\n";
+	cout<<"\t7.- Menu Ventas\n";
+	cout<<"\t8.- Menu Reportes\n";
+	cout<<"\t0.- Salir\n";
+		while (!(cin >>opc))
+		{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout << "Por favor introduzca un numero entero: " << endl;
+		}
+		switch(opc){
+			case 1:
+					system("cls");
+					Menu_Productos();
+				break;
+			case 2: system("cls");
+					Menu_Clientes();
+				break;
+			case 3: 
+					system("cls");
+					Menu_Vendedores();
+				break;
+			case 4: 
+					system("cls");	
+					Menu_Automoviles();
+				break;
+			case 5: 
+					system("cls");			
+					Menu_Bombas();
+				break;
+			case 6: 
+					system("cls");
+					Menu_Compras();
+				break;
+			case 7: 
+					system("cls");
+					Menu_Ventas();
+				break;
+			case 8: 
+					system("cls");
+					Menu_Reportes();
+			default :
+				system("cls");if(opc!=0){
+				cout<<"ERROR OPCION INCORRECTA!\n\n";
+				}else{
+					cout<<"\n\n\n\n\t\tGracias por usar nuestro programa!";
+				}
+				break;
+
+		}
+	}while(opc!=0);
+getch();
+}
+
