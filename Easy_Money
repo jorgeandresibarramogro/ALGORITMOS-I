@@ -3,10 +3,14 @@
 
 #include "stdafx.h"
 #include <iostream>
+#include <conio.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <windows.h>
+#include <iomanip>
+#include <string.h>
+#include <math.h>
 #include <string>
-#include "conio.h"
 
 using namespace std;
 
@@ -16,26 +20,8 @@ struct user
 	string name;
 	string email;
 	string password;
-	string verify;
 	int edad;
-	int CI;
-	int cellphone;
-	string city;
-	string zone;
-	string state;
-	string country;
-	char status;
-};
-
-struct adm
-{
-	int id;
-	string name;
-	string email;
-	string code;
-	string verify;
-	int edad;
-	int CI;
+	char gender;
 	int cellphone;
 	char status;
 };
@@ -45,12 +31,12 @@ struct agreement
 	int id;
 	string job;
 	int payment;
-	string hour;
+	string address;
 	string time;
 };
 
 //ARCHIVOS
-/*void file_user()
+void file_user()
 {
 	FILE*ptr;
 	ptr=fopen("user.dat","wb");
@@ -68,16 +54,47 @@ void file_agreement()
 	ptr=fopen("agreement.dat","wb");
 	fclose(ptr);
 }
-*/
 
 //VALIDACIONES
-bool verif_solo_numeros(string cad)
+bool verif_solo_numeros(string linea)
 {
-	bool k=true;
+	bool b = true;
+	int longitud = linea.size();
+ 
+	if (longitud == 0) { // Cuando el usuario pulsa ENTER
+	   b = false;
+	 } else if (longitud == 1 && !isdigit(linea[0])) {
+	    b = false;
+		cout<<"Ingrese nuevamente.\n";
+		getch();
+	 } else {
+	    int i;
+	    if (linea[0] == '+' || linea[0] == '-')
+        i = 1;
+      else
+         i = 0;
+ 
+      while (i < longitud) {
+         if (!isdigit(linea[i])) {
+            b = false;
+			cout<<"Ingrese nuevamente.\n";
+			getch();
+            break;
+         }
+         i++;
+      }
+   }
+ 
+   return b;
+}
+
+bool verif_solo_letras(string cad)
+{
 	int i=0;
+	bool k=true;
 	while(i<cad.length()&&k==true)
 	{
-		if((cad[i]>='0')&&(cad[i]<='9'))
+		if(isalpha(cad[i])!=0 || cad[i]==' ')
 		{
 			i++;
 		}
@@ -85,20 +102,149 @@ bool verif_solo_numeros(string cad)
 		{
 			k=false;
 		}
+		if(cad[0]==' ')
+		{
+			k=false;
+		}
 	}
-	if (cad.length()==0)
-	{
-		k=false;
-	}
-	return k;
+	return(k);
 }
 
+//DATOS
+
+int GenerarIdUser(){
+	FILE*ptr;
+	user reg;
+	int n;
+	ptr=fopen("user.dat","rb");
+	if(ptr!=NULL)
+	{
+		fseek(ptr,-sizeof(reg),SEEK_END);
+		fread(&reg,sizeof(reg),1,ptr);
+		if(feof(ptr)==false)
+		{
+			n=reg.id+1;
+		}
+		else
+		{
+			n=1;
+		}
+		fclose(ptr);
+	}
+	return(n);
+}
+
+
+void nombreUser(string nom)
+{
+	do
+	{
+		do
+		{
+			cout << "Nombre: " ;
+			getline(cin, nom);
+		}while(nom.length()==0);
+	}while(verif_solo_letras(nom)==false);
+}
+
+
 //SUBMENU
+
+void mostrar()
+{
+	user reg;
+	int c=0;
+	FILE*ptr;
+	ptr=fopen("user.dat", "rb");
+	if(ptr!=NULL)
+	{
+		cout << "\n			USUARIOS		" << endl; 
+ 		cout << "\n----------------------------------------------------------------" << endl; 
+ 		cout << "\nID		Nombre		email		Edad	CI		Cellphone		Status	 " << endl; 
+ 		cout << "\n----------------------------------------------------------------" << endl; 
+		fread(&reg, sizeof(reg),1,ptr);
+		while(feof(ptr)==false)
+		{
+			if(reg.status=='A')
+			{
+				c++;
+				cout << endl << reg.id  << "		" << reg.name << endl;	
+			}
+			fread(&reg,sizeof(reg),1,ptr);
+		}
+		fclose (ptr);
+	}
+	else 
+	{
+		cout << "ERROR!! El archivo no existe. " << endl;
+	}
+}
+
+bool valemail(string cad)
+{
+	int n=cad.length(),i,arr=0,punto=0;
+	for(i=0;i<n;i++)
+	{
+		if(cad[i]!='@' && cad[i] !='.' && cad[i]!='_'&&cad[i]!='-')
+			if(cad[i]!=-92 && cad[i]!=-91)
+				if(!((cad[i]>96 && cad[i]<123) || (cad[i]>64 && cad[i]<91)))
+					return false;
+		if(cad[i]=='@')
+			arr++;
+		if(cad[i]=='.')
+			punto++;
+	}
+	if(punto>0)
+		if(arr==1)
+			return true;
+	return false;
+}
+
+void emailUser(string nom)
+{
+	do
+	{
+		do
+		{
+			cout << "E-mail: ";
+			getline(cin, nom);
+		}while(nom.length()==0);
+	}while(!valemail(nom));
+}
+
+
+void passwordUser(string pass)
+{
+	
+	char caracter;
+	cout << "Contrasena: " ;
+	caracter = getch();
+	pass = "";
+	 while (caracter != 13) {
+		if (caracter != 8) {
+			pass.push_back(caracter);
+			cout << "*";
+		} 
+		caracter = getch();
+    }
+}
 
 void signin()
 {
 	cout<<"\n_____________________________________________________________________________________________________________________\n";
 	cout<<"\n______________________BIENVENIDO A EASY MONEY___________________________________________________________________\n\n";
+	int c;
+	user reg;
+	FILE*ptr;
+	ptr=fopen("user.dat","ab");
+	cout << "  " << endl;
+	reg.id=GenerarIdUser();
+	nombreUser(reg.name);
+	emailUser(reg.email);
+	passwordUser(reg.password);
+	reg.status='A';
+	fwrite(&reg,sizeof(reg),1,ptr);
+	fclose(ptr);
 	getch();
 }
 void login()
@@ -106,19 +252,10 @@ void login()
 	cout<<"\n_____________________________________________________________________________________________________________________\n";
 	cout<<"\n______________________BIENVENIDO A EASY MONEY___________________________________________________________________\n\n";
 	cout<<"\n_____________________-.-Prueba gratuita de un mes*.*______________________________________________________________\n";
+	mostrar();
 	getch();
 }
-void adm()
-{
-	cout<<"\n_____________________________________________________________________________________________________________________\n";
-	cout<<"\n______________________BIENVENIDO A EASY MONEY___________________________________________________________________\n\n";
 
-}
-void privacy()
-{
-	cout<<"\n_____________________________________________________________________________________________________________________\n";
-	cout<<"\n______________________BIENVENIDO A EASY MONEY___________________________________________________________________\n\n";
-}
 
 void principal()
 {
@@ -138,13 +275,12 @@ void principal()
 			getline(cin, option);
 			system("cls");
 		} while(verif_solo_numeros(option)==false);
-		op=option.at(0);
-		switch(op)
+		op = atoi(option.c_str());
+		
+				file_user();switch(op)
 		{
 			case 1: signin(); break;
 			case 2: login(); break;
-			case 3: adm(); break;
-			case 4: privacy(); break;
 			case 0: cout<<"Cerrando programa, hasta pronto!\n"; break;
 			default: break;
 		}
